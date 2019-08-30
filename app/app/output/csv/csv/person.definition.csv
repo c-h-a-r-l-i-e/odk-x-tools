@@ -1,0 +1,14 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+age,age,integer,[]
+consent,consent,string,[]
+first_name,first_name,string,[]
+gender,gender,string,[]
+household_id,household_id,string,[]
+id,id,string,[]
+other_name,other_name,string,[]
+photo,photo,mimeUri,"[""photo_contentType"",""photo_uriFragment""]"
+photo_consent,photo_consent,string,[]
+photo_contentType,contentType,mimeType,[]
+photo_uriFragment,uriFragment,rowpath,[]
+registration_date,registration_date,date,[]
+surname,surname,string,[]

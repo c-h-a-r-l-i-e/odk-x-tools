@@ -1,0 +1,5 @@
+build/
+*.~lock.*
+app/output/props/*
+tempZipDir
+.idea/*

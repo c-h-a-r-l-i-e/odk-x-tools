@@ -1,0 +1,2945 @@
+{
+  "xlsx": {
+    "survey": [
+      {
+        "values_list": "consent",
+        "type": "select_one",
+        "name": "consent",
+        "display": {
+          "prompt": {
+            "text": "1. I'd like to ask you questions in order to help us conduct research in hopes to improve healthcare for Lassa fever. Redeemer University, the University of Cambridge, and our partners may have access to this information, including your current location, and potentially voice recording. If you accept, you may withdraw your permission at any time and ask for your data to be erased. Choosing to not participate will in no way affect the care and treatment you will receive. Are happy to participate?"
+          }
+        },
+        "required": 1,
+        "_row_num": 3
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'consent',data('consent')]]))",
+        "_row_num": 4
+      },
+      {
+        "clause": "if",
+        "condition": "data('consent') == 'Yes'",
+        "_row_num": 6
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 7
+      },
+      {
+        "type": "text",
+        "name": "first_name",
+        "display": {
+          "prompt": {
+            "text": "3. What is your first name?"
+          }
+        },
+        "required": "data('consent') == 'Yes'",
+        "_row_num": 8
+      },
+      {
+        "type": "text",
+        "name": "other_name",
+        "display": {
+          "prompt": {
+            "text": "4. What is your other name?"
+          },
+          "hint": {
+            "text": "Skip if none."
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "type": "text",
+        "name": "surname",
+        "display": {
+          "prompt": {
+            "text": "2. What is your surname?"
+          }
+        },
+        "required": "data('consent') == 'Yes'",
+        "_row_num": 12
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 13
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'surname',data('surname')]]))",
+        "_row_num": 14
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'other_name',data('other_name')]]))",
+        "_row_num": 15
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'first_name',data('first_name')]]))",
+        "_row_num": 16
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 17
+      },
+      {
+        "type": "integer",
+        "name": "age",
+        "display": {
+          "prompt": {
+            "text": "5. Age at last birthday (in years)"
+          },
+          "constraint_message": {
+            "text": "Enter age in years:"
+          }
+        },
+        "constraint": "data('age') <= 150 && data('age') >= 0",
+        "required": "data('consent') == 'Yes'",
+        "_row_num": 18
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "2004 &#8211; 15\n2003 - 16\n2002 - 17\n2001 - 18\n2000 - 19\n1999 - 20\n1998 - 21\n1997 - 22\n1996 - 23\n1995 - 24\n1994 - 25\n1993 - 26\n1992 &#8211; 27\n1991 - 28\n1990 - 29\n1989 - 30\n1988 - 31\n1987 - 32\n1986 - 33\n1985 - 34\n1984 - 35\n1983 - 36\n1982 - 37\n1981 - 38\n1980 - 39\n1979 - 40\n1978 - 41\n1977 - 42\n1976 - 43\n1975 - 44\n1974 - 45\n1973 - 46\n1972 - 47\n1971 - 48\n1970 - 49\n1969 - 50\n1968 - 51\n1967 - 52\n1966 - 53\n1965 - 54\n1964 - 55\n1963 - 56\n1962 - 57\n1961 - 58\n1960 - 59\n1959 - 60\n1958 - 61\n1957 - 62\n1956 - 63\n1955 - 64\n1954 - 65\n1953 - 66\n1952 - 67\n1951 - 68\n1950 - 69\n1949 - 70\n1948 - 71\n1947 - 72\n1946 - 73\n1945 - 74\n1944 - 75\n1943 - 76\n1942 - 77\n1941 - 78\n1940 - 79\n1939 - 80\n1938 - 81\n1937 - 82\n1936 - 83\n1935 - 84\n1934 - 85\n1933 - 86\n1932 - 87\n1931 - 88\n1930 - 89\n1929 - 90\n1928 - 91\n1927 - 92\n1926 - 93\n1925 - 94\n1924 - 95\n1923 - 96\n1922 - 97\n1921 - 98\n1920 - 99\n1919 - 100\n1918 - 101\n1917 - 102\n1916 - 103\n1915 - 104\n1914 - 105\n1913 - 106\n1912 - 107\n1911 - 108\n1910 - 109\n1909 - 110\n1908 - 111\n1907 - 112\n1906 - 113\n1905 - 114\n1904 - 115\n1903 - 116\n1902 - 117\n1901 - 118\n1900 - 119"
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 21
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'age',data('age')]]))",
+        "_row_num": 22
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 23
+      },
+      {
+        "values_list": "gender",
+        "type": "select_one",
+        "name": "gender",
+        "display": {
+          "prompt": {
+            "text": "6. Gender"
+          }
+        },
+        "required": "data('consent') == 'Yes'",
+        "_row_num": 24
+      },
+      {
+        "type": "assign",
+        "name": "registration_date",
+        "calculation": "odkCommon.toOdkTimeStampFromDate(new Date())",
+        "comments": "Default registration date to today",
+        "_row_num": 26
+      },
+      {
+        "type": "date",
+        "name": "registration_date",
+        "display": {
+          "prompt": {
+            "text": "7. Registration date"
+          },
+          "hint": {
+            "text": "Today's date"
+          }
+        },
+        "required": "data('consent') == 'Yes'",
+        "_row_num": 27
+      },
+      {
+        "values_list": "photo_consent",
+        "type": "select_one",
+        "name": "photo_consent",
+        "display": {
+          "prompt": {
+            "text": "46. May I take your photo?"
+          },
+          "hint": {
+            "text": "It's not necessary."
+          }
+        },
+        "_row_num": 29
+      },
+      {
+        "clause": "if",
+        "condition": "data('photo_consent') == 'Yes'",
+        "_row_num": 30
+      },
+      {
+        "type": "image",
+        "name": "photo",
+        "display": {
+          "prompt": {
+            "text": "47. [Take picture of full face]"
+          }
+        },
+        "_row_num": 31
+      },
+      {
+        "clause": "end if",
+        "_row_num": 32
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 35
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'photo',data('photo')]]))",
+        "_row_num": 36
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'photo_consent',data('photo_consent')]]))",
+        "_row_num": 37
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'registration_date',data('registration_date')]]))",
+        "_row_num": 38
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'registration_date',data('registration_date')]]))",
+        "_row_num": 39
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'gender',data('gender')]]))",
+        "_row_num": 40
+      },
+      {
+        "clause": "end if",
+        "_row_num": 41
+      },
+      {
+        "type": "assign",
+        "name": "log_0",
+        "calculation": "data('log').substring(0,60000) == '' ? ' ' : data('log').substring(0,60000)",
+        "_row_num": 42
+      },
+      {
+        "type": "assign",
+        "name": "log_1",
+        "calculation": "data('log').substring(60000,120000) == '' ? ' ' : data('log').substring(60000,120000)",
+        "_row_num": 43
+      },
+      {
+        "type": "assign",
+        "name": "log_2",
+        "calculation": "data('log').substring(120000,180000) == '' ? ' ' : data('log').substring(120000,180000)",
+        "_row_num": 44
+      },
+      {
+        "type": "assign",
+        "name": "log_3",
+        "calculation": "data('log').substring(180000,240000) == '' ? ' ' : data('log').substring(180000,240000)",
+        "_row_num": 45
+      },
+      {
+        "type": "assign",
+        "name": "log_4",
+        "calculation": "data('log').substring(240000,300000) == '' ? ' ' : data('log').substring(240000,300000)",
+        "_row_num": 46
+      },
+      {
+        "type": "assign",
+        "name": "log_5",
+        "calculation": "data('log').substring(300000,360000) == '' ? ' ' : data('log').substring(300000,360000)",
+        "_row_num": 47
+      },
+      {
+        "type": "assign",
+        "name": "log_6",
+        "calculation": "data('log').substring(360000,420000) == '' ? ' ' : data('log').substring(360000,420000)",
+        "_row_num": 48
+      },
+      {
+        "type": "assign",
+        "name": "log_7",
+        "calculation": "data('log').substring(420000,480000) == '' ? ' ' : data('log').substring(420000,480000)",
+        "_row_num": 49
+      },
+      {
+        "type": "assign",
+        "name": "log_8",
+        "calculation": "data('log').substring(480000,540000) == '' ? ' ' : data('log').substring(480000,540000)",
+        "_row_num": 50
+      },
+      {
+        "type": "assign",
+        "name": "log_9",
+        "calculation": "data('log').substring(540000,600000) == '' ? ' ' : data('log').substring(540000,600000)",
+        "_row_num": 51
+      },
+      {
+        "type": "assign",
+        "name": "log_10",
+        "calculation": "data('log').substring(600000,660000) == '' ? ' ' : data('log').substring(600000,660000)",
+        "_row_num": 52
+      },
+      {
+        "type": "assign",
+        "name": "log_11",
+        "calculation": "data('log').substring(660000,720000) == '' ? ' ' : data('log').substring(660000,720000)",
+        "_row_num": 53
+      },
+      {
+        "type": "assign",
+        "name": "log_12",
+        "calculation": "data('log').substring(720000,780000) == '' ? ' ' : data('log').substring(720000,780000)",
+        "_row_num": 54
+      },
+      {
+        "type": "assign",
+        "name": "log_13",
+        "calculation": "data('log').substring(780000,840000) == '' ? ' ' : data('log').substring(780000,840000)",
+        "_row_num": 55
+      },
+      {
+        "type": "assign",
+        "name": "log_14",
+        "calculation": "data('log').substring(840000,900000) == '' ? ' ' : data('log').substring(840000,900000)",
+        "_row_num": 56
+      },
+      {
+        "type": "assign",
+        "name": "log_15",
+        "calculation": "data('log').substring(900000,960000) == '' ? ' ' : data('log').substring(900000,960000)",
+        "_row_num": 57
+      },
+      {
+        "type": "assign",
+        "name": "log_16",
+        "calculation": "data('log').substring(960000,1020000) == '' ? ' ' : data('log').substring(960000,1020000)",
+        "_row_num": 58
+      },
+      {
+        "type": "assign",
+        "name": "log_17",
+        "calculation": "data('log').substring(1020000,1080000) == '' ? ' ' : data('log').substring(1020000,1080000)",
+        "_row_num": 59
+      },
+      {
+        "type": "assign",
+        "name": "log_18",
+        "calculation": "data('log').substring(1080000,1140000) == '' ? ' ' : data('log').substring(1080000,1140000)",
+        "_row_num": 60
+      },
+      {
+        "type": "assign",
+        "name": "log_19",
+        "calculation": "data('log').substring(1140000,1200000) == '' ? ' ' : data('log').substring(1140000,1200000)",
+        "_row_num": 61
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "table_id",
+        "value": "person",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_id",
+        "value": "person",
+        "_row_num": 3
+      },
+      {
+        "setting_name": "form_version",
+        "value": 1,
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "en": "New Person",
+              "default": "New Person"
+            }
+          }
+        },
+        "_row_num": 5
+      }
+    ],
+    "model": [
+      {
+        "name": "id",
+        "type": "string",
+        "_row_num": 2
+      },
+      {
+        "name": "household_id",
+        "type": "string",
+        "_row_num": 3
+      },
+      {
+        "name": "log",
+        "type": "string",
+        "isSessionVariable": "yes",
+        "_row_num": 4
+      },
+      {
+        "name": "log_0",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 5
+      },
+      {
+        "name": "log_1",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 6
+      },
+      {
+        "name": "log_2",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 7
+      },
+      {
+        "name": "log_3",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 8
+      },
+      {
+        "name": "log_4",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 9
+      },
+      {
+        "name": "log_5",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 10
+      },
+      {
+        "name": "log_6",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 11
+      },
+      {
+        "name": "log_7",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 12
+      },
+      {
+        "name": "log_8",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 13
+      },
+      {
+        "name": "log_9",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 14
+      },
+      {
+        "name": "log_10",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 15
+      },
+      {
+        "name": "log_11",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 16
+      },
+      {
+        "name": "log_12",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 17
+      },
+      {
+        "name": "log_13",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 18
+      },
+      {
+        "name": "log_14",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 19
+      },
+      {
+        "name": "log_15",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 20
+      },
+      {
+        "name": "log_16",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 21
+      },
+      {
+        "name": "log_17",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 22
+      },
+      {
+        "name": "log_18",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 23
+      },
+      {
+        "name": "log_19",
+        "type": "string",
+        "elementType": "string(60000)",
+        "_row_num": 24
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "site",
+        "data_value": "Ondo",
+        "display": {
+          "title": {
+            "text": "Ondo"
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "site",
+        "data_value": "Edo",
+        "display": {
+          "title": {
+            "text": "Edo"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "site",
+        "data_value": "Ebonyi",
+        "display": {
+          "title": {
+            "text": "Ebonyi"
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "consent",
+        "data_value": "Yes",
+        "display": {
+          "title": {
+            "text": "Yes"
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "consent",
+        "data_value": "No",
+        "display": {
+          "title": {
+            "text": "No"
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "gender",
+        "data_value": "Female",
+        "display": {
+          "title": {
+            "text": "Female"
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "gender",
+        "data_value": "Male",
+        "display": {
+          "title": {
+            "text": "Male"
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "GPS_ID",
+        "data_value": "household",
+        "display": {
+          "title": {
+            "text": "Household"
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "GPS_ID",
+        "data_value": "community",
+        "display": {
+          "title": {
+            "text": "Community"
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "GPS_ID",
+        "data_value": "nearest hospital",
+        "display": {
+          "title": {
+            "text": "Nearest hospital"
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "GPS_ID",
+        "data_value": "dumpsite",
+        "display": {
+          "title": {
+            "text": "Dumpsite"
+          }
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "GPS_ID",
+        "data_value": "traps",
+        "display": {
+          "title": {
+            "text": "Traps"
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "choice_list_name": "GPS_ID",
+        "data_value": "rice_or_other_farm",
+        "display": {
+          "title": {
+            "text": "Rice or other farm"
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "GPS_ID",
+        "data_value": "garri_rice_or_grain_drying_spot",
+        "display": {
+          "title": {
+            "text": "Garri, rice or grain drying spot"
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "photo_consent",
+        "data_value": "Yes",
+        "display": {
+          "title": {
+            "text": "Yes"
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "photo_consent",
+        "data_value": "No",
+        "display": {
+          "title": {
+            "text": "No"
+          }
+        },
+        "_row_num": 24
+      }
+    ]
+  },
+  "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
+      "selectionArgs": "formula",
+      "url": "formula",
+      "uri": "formula",
+      "callback": "formula(context)",
+      "choice_filter": "formula(choice_item)",
+      "templatePath": "requirejs_path"
+    },
+    "settings": {
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "person",
+        "_row_num": 2
+      },
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "person",
+        "_row_num": 3
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 1,
+        "_row_num": 4
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "en": "New Person",
+              "default": "New Person"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": "en"
+              }
+            },
+            "name": "en"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "en"
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "en": "New Person",
+              "default": "New Person"
+            }
+          }
+        },
+        "_row_num": 5
+      }
+    },
+    "choices": {
+      "site": [
+        {
+          "choice_list_name": "site",
+          "data_value": "Ondo",
+          "display": {
+            "title": {
+              "text": "Ondo"
+            }
+          },
+          "_row_num": 4
+        },
+        {
+          "choice_list_name": "site",
+          "data_value": "Edo",
+          "display": {
+            "title": {
+              "text": "Edo"
+            }
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "site",
+          "data_value": "Ebonyi",
+          "display": {
+            "title": {
+              "text": "Ebonyi"
+            }
+          },
+          "_row_num": 6
+        }
+      ],
+      "consent": [
+        {
+          "choice_list_name": "consent",
+          "data_value": "Yes",
+          "display": {
+            "title": {
+              "text": "Yes"
+            }
+          },
+          "_row_num": 8
+        },
+        {
+          "choice_list_name": "consent",
+          "data_value": "No",
+          "display": {
+            "title": {
+              "text": "No"
+            }
+          },
+          "_row_num": 9
+        }
+      ],
+      "gender": [
+        {
+          "choice_list_name": "gender",
+          "data_value": "Female",
+          "display": {
+            "title": {
+              "text": "Female"
+            }
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "gender",
+          "data_value": "Male",
+          "display": {
+            "title": {
+              "text": "Male"
+            }
+          },
+          "_row_num": 12
+        }
+      ],
+      "GPS_ID": [
+        {
+          "choice_list_name": "GPS_ID",
+          "data_value": "household",
+          "display": {
+            "title": {
+              "text": "Household"
+            }
+          },
+          "_row_num": 14
+        },
+        {
+          "choice_list_name": "GPS_ID",
+          "data_value": "community",
+          "display": {
+            "title": {
+              "text": "Community"
+            }
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "GPS_ID",
+          "data_value": "nearest hospital",
+          "display": {
+            "title": {
+              "text": "Nearest hospital"
+            }
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "GPS_ID",
+          "data_value": "dumpsite",
+          "display": {
+            "title": {
+              "text": "Dumpsite"
+            }
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "GPS_ID",
+          "data_value": "traps",
+          "display": {
+            "title": {
+              "text": "Traps"
+            }
+          },
+          "_row_num": 18
+        },
+        {
+          "choice_list_name": "GPS_ID",
+          "data_value": "rice_or_other_farm",
+          "display": {
+            "title": {
+              "text": "Rice or other farm"
+            }
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "GPS_ID",
+          "data_value": "garri_rice_or_grain_drying_spot",
+          "display": {
+            "title": {
+              "text": "Garri, rice or grain drying spot"
+            }
+          },
+          "_row_num": 20
+        }
+      ],
+      "photo_consent": [
+        {
+          "choice_list_name": "photo_consent",
+          "data_value": "Yes",
+          "display": {
+            "title": {
+              "text": "Yes"
+            }
+          },
+          "_row_num": 23
+        },
+        {
+          "choice_list_name": "photo_consent",
+          "data_value": "No",
+          "display": {
+            "title": {
+              "text": "No"
+            }
+          },
+          "_row_num": 24
+        }
+      ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
+    "queries": {},
+    "calculates": {},
+    "model": {
+      "id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "id"
+      },
+      "household_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "household_id"
+      },
+      "log": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": "yes",
+        "elementKey": "log"
+      },
+      "log_0": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 42,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_0"
+      },
+      "log_1": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_1"
+      },
+      "log_2": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_2"
+      },
+      "log_3": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_3"
+      },
+      "log_4": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_4"
+      },
+      "log_5": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_5"
+      },
+      "log_6": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_6"
+      },
+      "log_7": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_7"
+      },
+      "log_8": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_8"
+      },
+      "log_9": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 51,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_9"
+      },
+      "log_10": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_10"
+      },
+      "log_11": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_11"
+      },
+      "log_12": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 54,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_12"
+      },
+      "log_13": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_13"
+      },
+      "log_14": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 19,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_14"
+      },
+      "log_15": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 57,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 20,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_15"
+      },
+      "log_16": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 58,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 21,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_16"
+      },
+      "log_17": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 22,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_17"
+      },
+      "log_18": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 60,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 23,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_18"
+      },
+      "log_19": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 61,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_19"
+      },
+      "consent": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "consent",
+        "elementKey": "consent"
+      },
+      "first_name": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "first_name"
+      },
+      "other_name": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "other_name"
+      },
+      "surname": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "surname"
+      },
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age"
+      },
+      "gender": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "gender",
+        "elementKey": "gender"
+      },
+      "registration_date": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "elementKey": "registration_date"
+      },
+      "photo_consent": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "photo_consent",
+        "elementKey": "photo_consent"
+      },
+      "photo": {
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "photo_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "photo_contentType"
+          }
+        },
+        "elementKey": "photo"
+      }
+    },
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "values_list": "consent",
+            "type": "select_one",
+            "name": "consent",
+            "display": {
+              "prompt": {
+                "text": "1. I'd like to ask you questions in order to help us conduct research in hopes to improve healthcare for Lassa fever. Redeemer University, the University of Cambridge, and our partners may have access to this information, including your current location, and potentially voice recording. If you accept, you may withdraw your permission at any time and ask for your data to be erased. Choosing to not participate will in no way affect the care and treatment you will receive. Are happy to participate?"
+              }
+            },
+            "required": 1,
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 0
+          },
+          {
+            "type": "text",
+            "name": "first_name",
+            "display": {
+              "prompt": {
+                "text": "3. What is your first name?"
+              }
+            },
+            "required": "data('consent') == 'Yes'",
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 1
+          },
+          {
+            "type": "text",
+            "name": "other_name",
+            "display": {
+              "prompt": {
+                "text": "4. What is your other name?"
+              },
+              "hint": {
+                "text": "Skip if none."
+              }
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 2
+          },
+          {
+            "type": "text",
+            "name": "surname",
+            "display": {
+              "prompt": {
+                "text": "2. What is your surname?"
+              }
+            },
+            "required": "data('consent') == 'Yes'",
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 3
+          },
+          {
+            "type": "integer",
+            "name": "age",
+            "display": {
+              "prompt": {
+                "text": "5. Age at last birthday (in years)"
+              },
+              "constraint_message": {
+                "text": "Enter age in years:"
+              }
+            },
+            "constraint": "data('age') <= 150 && data('age') >= 0",
+            "required": "data('consent') == 'Yes'",
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 4
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "2004 &#8211; 15\n2003 - 16\n2002 - 17\n2001 - 18\n2000 - 19\n1999 - 20\n1998 - 21\n1997 - 22\n1996 - 23\n1995 - 24\n1994 - 25\n1993 - 26\n1992 &#8211; 27\n1991 - 28\n1990 - 29\n1989 - 30\n1988 - 31\n1987 - 32\n1986 - 33\n1985 - 34\n1984 - 35\n1983 - 36\n1982 - 37\n1981 - 38\n1980 - 39\n1979 - 40\n1978 - 41\n1977 - 42\n1976 - 43\n1975 - 44\n1974 - 45\n1973 - 46\n1972 - 47\n1971 - 48\n1970 - 49\n1969 - 50\n1968 - 51\n1967 - 52\n1966 - 53\n1965 - 54\n1964 - 55\n1963 - 56\n1962 - 57\n1961 - 58\n1960 - 59\n1959 - 60\n1958 - 61\n1957 - 62\n1956 - 63\n1955 - 64\n1954 - 65\n1953 - 66\n1952 - 67\n1951 - 68\n1950 - 69\n1949 - 70\n1948 - 71\n1947 - 72\n1946 - 73\n1945 - 74\n1944 - 75\n1943 - 76\n1942 - 77\n1941 - 78\n1940 - 79\n1939 - 80\n1938 - 81\n1937 - 82\n1936 - 83\n1935 - 84\n1934 - 85\n1933 - 86\n1932 - 87\n1931 - 88\n1930 - 89\n1929 - 90\n1928 - 91\n1927 - 92\n1926 - 93\n1925 - 94\n1924 - 95\n1923 - 96\n1922 - 97\n1921 - 98\n1920 - 99\n1919 - 100\n1918 - 101\n1917 - 102\n1916 - 103\n1915 - 104\n1914 - 105\n1913 - 106\n1912 - 107\n1911 - 108\n1910 - 109\n1909 - 110\n1908 - 111\n1907 - 112\n1906 - 113\n1905 - 114\n1904 - 115\n1903 - 116\n1902 - 117\n1901 - 118\n1900 - 119"
+              }
+            },
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 5
+          },
+          {
+            "values_list": "gender",
+            "type": "select_one",
+            "name": "gender",
+            "display": {
+              "prompt": {
+                "text": "6. Gender"
+              }
+            },
+            "required": "data('consent') == 'Yes'",
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 6
+          },
+          {
+            "type": "date",
+            "name": "registration_date",
+            "display": {
+              "prompt": {
+                "text": "7. Registration date"
+              },
+              "hint": {
+                "text": "Today's date"
+              }
+            },
+            "required": "data('consent') == 'Yes'",
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "date",
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 7
+          },
+          {
+            "values_list": "photo_consent",
+            "type": "select_one",
+            "name": "photo_consent",
+            "display": {
+              "prompt": {
+                "text": "46. May I take your photo?"
+              },
+              "hint": {
+                "text": "It's not necessary."
+              }
+            },
+            "_row_num": 29,
+            "__rowNum__": 28,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 8
+          },
+          {
+            "type": "image",
+            "name": "photo",
+            "display": {
+              "prompt": {
+                "text": "47. [Take picture of full face]"
+              }
+            },
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 9
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 62,
+            "_branch_label_enclosing_screen": "survey/_screen62",
+            "promptIdx": 10
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": [
+            0,
+            1,
+            3,
+            4,
+            6,
+            7
+          ]
+        },
+        "operations": [
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'consent',data('consent')]]))",
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "assign",
+            "operationIdx": 1
+          },
+          {
+            "clause": "if",
+            "condition": "data('consent') == 'Yes'",
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "goto_label",
+            "_branch_label": "_then6",
+            "operationIdx": 2
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else41",
+            "_row_num": 41,
+            "operationIdx": 3
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 13,
+              "__rowNum__": 12,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'surname',data('surname')]]))",
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "assign",
+            "operationIdx": 5
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'other_name',data('other_name')]]))",
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "assign",
+            "operationIdx": 6
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'first_name',data('first_name')]]))",
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "assign",
+            "operationIdx": 7
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 21,
+              "__rowNum__": 20,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'age',data('age')]]))",
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "assign",
+            "operationIdx": 9
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 35,
+              "__rowNum__": 34,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nassign('registration_date', odkCommon.toOdkTimeStampFromDate(new Date()));\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nif (data('photo_consent') == 'Yes') {\nactivePromptIndicies.push(9);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'photo',data('photo')]]))",
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "assign",
+            "operationIdx": 11
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'photo_consent',data('photo_consent')]]))",
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "assign",
+            "operationIdx": 12
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'registration_date',data('registration_date')]]))",
+            "_row_num": 38,
+            "__rowNum__": 37,
+            "_token_type": "assign",
+            "operationIdx": 13
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'registration_date',data('registration_date')]]))",
+            "_row_num": 39,
+            "__rowNum__": 38,
+            "_token_type": "assign",
+            "operationIdx": 14
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'gender',data('gender')]]))",
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "assign",
+            "operationIdx": 15
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif41",
+            "_row_num": 41,
+            "operationIdx": 16
+          },
+          {
+            "type": "assign",
+            "name": "log_0",
+            "calculation": "data('log').substring(0,60000) == '' ? ' ' : data('log').substring(0,60000)",
+            "_row_num": 42,
+            "__rowNum__": 41,
+            "_token_type": "assign",
+            "operationIdx": 17
+          },
+          {
+            "type": "assign",
+            "name": "log_1",
+            "calculation": "data('log').substring(60000,120000) == '' ? ' ' : data('log').substring(60000,120000)",
+            "_row_num": 43,
+            "__rowNum__": 42,
+            "_token_type": "assign",
+            "operationIdx": 18
+          },
+          {
+            "type": "assign",
+            "name": "log_2",
+            "calculation": "data('log').substring(120000,180000) == '' ? ' ' : data('log').substring(120000,180000)",
+            "_row_num": 44,
+            "__rowNum__": 43,
+            "_token_type": "assign",
+            "operationIdx": 19
+          },
+          {
+            "type": "assign",
+            "name": "log_3",
+            "calculation": "data('log').substring(180000,240000) == '' ? ' ' : data('log').substring(180000,240000)",
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "assign",
+            "operationIdx": 20
+          },
+          {
+            "type": "assign",
+            "name": "log_4",
+            "calculation": "data('log').substring(240000,300000) == '' ? ' ' : data('log').substring(240000,300000)",
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "assign",
+            "operationIdx": 21
+          },
+          {
+            "type": "assign",
+            "name": "log_5",
+            "calculation": "data('log').substring(300000,360000) == '' ? ' ' : data('log').substring(300000,360000)",
+            "_row_num": 47,
+            "__rowNum__": 46,
+            "_token_type": "assign",
+            "operationIdx": 22
+          },
+          {
+            "type": "assign",
+            "name": "log_6",
+            "calculation": "data('log').substring(360000,420000) == '' ? ' ' : data('log').substring(360000,420000)",
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "assign",
+            "operationIdx": 23
+          },
+          {
+            "type": "assign",
+            "name": "log_7",
+            "calculation": "data('log').substring(420000,480000) == '' ? ' ' : data('log').substring(420000,480000)",
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "assign",
+            "operationIdx": 24
+          },
+          {
+            "type": "assign",
+            "name": "log_8",
+            "calculation": "data('log').substring(480000,540000) == '' ? ' ' : data('log').substring(480000,540000)",
+            "_row_num": 50,
+            "__rowNum__": 49,
+            "_token_type": "assign",
+            "operationIdx": 25
+          },
+          {
+            "type": "assign",
+            "name": "log_9",
+            "calculation": "data('log').substring(540000,600000) == '' ? ' ' : data('log').substring(540000,600000)",
+            "_row_num": 51,
+            "__rowNum__": 50,
+            "_token_type": "assign",
+            "operationIdx": 26
+          },
+          {
+            "type": "assign",
+            "name": "log_10",
+            "calculation": "data('log').substring(600000,660000) == '' ? ' ' : data('log').substring(600000,660000)",
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "assign",
+            "operationIdx": 27
+          },
+          {
+            "type": "assign",
+            "name": "log_11",
+            "calculation": "data('log').substring(660000,720000) == '' ? ' ' : data('log').substring(660000,720000)",
+            "_row_num": 53,
+            "__rowNum__": 52,
+            "_token_type": "assign",
+            "operationIdx": 28
+          },
+          {
+            "type": "assign",
+            "name": "log_12",
+            "calculation": "data('log').substring(720000,780000) == '' ? ' ' : data('log').substring(720000,780000)",
+            "_row_num": 54,
+            "__rowNum__": 53,
+            "_token_type": "assign",
+            "operationIdx": 29
+          },
+          {
+            "type": "assign",
+            "name": "log_13",
+            "calculation": "data('log').substring(780000,840000) == '' ? ' ' : data('log').substring(780000,840000)",
+            "_row_num": 55,
+            "__rowNum__": 54,
+            "_token_type": "assign",
+            "operationIdx": 30
+          },
+          {
+            "type": "assign",
+            "name": "log_14",
+            "calculation": "data('log').substring(840000,900000) == '' ? ' ' : data('log').substring(840000,900000)",
+            "_row_num": 56,
+            "__rowNum__": 55,
+            "_token_type": "assign",
+            "operationIdx": 31
+          },
+          {
+            "type": "assign",
+            "name": "log_15",
+            "calculation": "data('log').substring(900000,960000) == '' ? ' ' : data('log').substring(900000,960000)",
+            "_row_num": 57,
+            "__rowNum__": 56,
+            "_token_type": "assign",
+            "operationIdx": 32
+          },
+          {
+            "type": "assign",
+            "name": "log_16",
+            "calculation": "data('log').substring(960000,1020000) == '' ? ' ' : data('log').substring(960000,1020000)",
+            "_row_num": 58,
+            "__rowNum__": 57,
+            "_token_type": "assign",
+            "operationIdx": 33
+          },
+          {
+            "type": "assign",
+            "name": "log_17",
+            "calculation": "data('log').substring(1020000,1080000) == '' ? ' ' : data('log').substring(1020000,1080000)",
+            "_row_num": 59,
+            "__rowNum__": 58,
+            "_token_type": "assign",
+            "operationIdx": 34
+          },
+          {
+            "type": "assign",
+            "name": "log_18",
+            "calculation": "data('log').substring(1080000,1140000) == '' ? ' ' : data('log').substring(1080000,1140000)",
+            "_row_num": 60,
+            "__rowNum__": 59,
+            "_token_type": "assign",
+            "operationIdx": 35
+          },
+          {
+            "type": "assign",
+            "name": "log_19",
+            "calculation": "data('log').substring(1140000,1200000) == '' ? ' ' : data('log').substring(1140000,1200000)",
+            "_row_num": 61,
+            "__rowNum__": 60,
+            "_token_type": "assign",
+            "operationIdx": 36
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 62,
+            "operationIdx": 37
+          },
+          {
+            "_row_num": 62,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 38
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 62,
+            "operationIdx": 39
+          }
+        ],
+        "branch_label_map": {
+          "_screen3": 0,
+          "_then6": 4,
+          "_screen7": 4,
+          "_screen17": 8,
+          "_screen23": 10,
+          "_else41": 17,
+          "_endif41": 17,
+          "_contents": 38,
+          "_screen62": 38
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_row_num": 3,
+            "type": "opening",
+            "display": {
+              "text": "Edit form"
+            },
+            "_token_type": "prompt",
+            "_type": "opening",
+            "_branch_label_enclosing_screen": "initial/_screen3",
+            "promptIdx": 0
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 1,
+            "display": {
+              "title": {
+                "text": {
+                  "en": "New Person",
+                  "default": "New Person"
+                }
+              }
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_row_num": 5,
+            "type": "finalize",
+            "display": {
+              "text": "Save form"
+            },
+            "_token_type": "prompt",
+            "_type": "finalize",
+            "_branch_label_enclosing_screen": "initial/_screen5",
+            "promptIdx": 2
+          },
+          {
+            "_row_num": 7,
+            "type": "instances",
+            "display": {
+              "text": "Saved instances"
+            },
+            "_token_type": "prompt",
+            "_type": "instances",
+            "_branch_label_enclosing_screen": "initial/_screen7",
+            "promptIdx": 3
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "initial/_screen9",
+            "promptIdx": 4
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "clause": "if // start",
+            "condition": "(opendatakit.getCurrentInstanceId() != null)",
+            "_token_type": "goto_label",
+            "_tag_name": "start",
+            "_branch_label": "_then2",
+            "operationIdx": 0
+          },
+          {
+            "clause": "else // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_else6",
+            "_row_num": 6,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 9
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 10
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 12
+          }
+        ],
+        "branch_label_map": {
+          "_then2": 2,
+          "_screen3": 2,
+          "_screen5": 4,
+          "_else6": 6,
+          "_screen7": 6,
+          "_endif8": 7,
+          "_contents": 8,
+          "_screen9": 8,
+          "_finalize": 10
+        }
+      }
+    },
+    "dataTableModel": {
+      "id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "id",
+        "elementName": "id",
+        "elementSet": "data",
+        "elementPath": "id"
+      },
+      "household_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "household_id",
+        "elementName": "household_id",
+        "elementSet": "data",
+        "elementPath": "household_id"
+      },
+      "log": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 36,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": "yes",
+        "elementKey": "log",
+        "elementName": "log",
+        "elementSet": "data",
+        "elementPath": "log"
+      },
+      "log_0": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 42,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_0",
+        "elementName": "log_0",
+        "elementSet": "data",
+        "elementPath": "log_0"
+      },
+      "log_1": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_1",
+        "elementName": "log_1",
+        "elementSet": "data",
+        "elementPath": "log_1"
+      },
+      "log_2": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 44,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_2",
+        "elementName": "log_2",
+        "elementSet": "data",
+        "elementPath": "log_2"
+      },
+      "log_3": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 45,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_3",
+        "elementName": "log_3",
+        "elementSet": "data",
+        "elementPath": "log_3"
+      },
+      "log_4": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 46,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_4",
+        "elementName": "log_4",
+        "elementSet": "data",
+        "elementPath": "log_4"
+      },
+      "log_5": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 47,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_5",
+        "elementName": "log_5",
+        "elementSet": "data",
+        "elementPath": "log_5"
+      },
+      "log_6": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_6",
+        "elementName": "log_6",
+        "elementSet": "data",
+        "elementPath": "log_6"
+      },
+      "log_7": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 49,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_7",
+        "elementName": "log_7",
+        "elementSet": "data",
+        "elementPath": "log_7"
+      },
+      "log_8": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 50,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_8",
+        "elementName": "log_8",
+        "elementSet": "data",
+        "elementPath": "log_8"
+      },
+      "log_9": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 51,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_9",
+        "elementName": "log_9",
+        "elementSet": "data",
+        "elementPath": "log_9"
+      },
+      "log_10": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 52,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_10",
+        "elementName": "log_10",
+        "elementSet": "data",
+        "elementPath": "log_10"
+      },
+      "log_11": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_11",
+        "elementName": "log_11",
+        "elementSet": "data",
+        "elementPath": "log_11"
+      },
+      "log_12": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 54,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_12",
+        "elementName": "log_12",
+        "elementSet": "data",
+        "elementPath": "log_12"
+      },
+      "log_13": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_13",
+        "elementName": "log_13",
+        "elementSet": "data",
+        "elementPath": "log_13"
+      },
+      "log_14": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 19,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_14",
+        "elementName": "log_14",
+        "elementSet": "data",
+        "elementPath": "log_14"
+      },
+      "log_15": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 57,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 20,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_15",
+        "elementName": "log_15",
+        "elementSet": "data",
+        "elementPath": "log_15"
+      },
+      "log_16": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 58,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 21,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_16",
+        "elementName": "log_16",
+        "elementSet": "data",
+        "elementPath": "log_16"
+      },
+      "log_17": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 59,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 22,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_17",
+        "elementName": "log_17",
+        "elementSet": "data",
+        "elementPath": "log_17"
+      },
+      "log_18": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 60,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 23,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_18",
+        "elementName": "log_18",
+        "elementSet": "data",
+        "elementPath": "log_18"
+      },
+      "log_19": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 61,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementType": "string(60000)",
+        "elementKey": "log_19",
+        "elementName": "log_19",
+        "elementSet": "data",
+        "elementPath": "log_19"
+      },
+      "consent": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "consent",
+        "elementKey": "consent",
+        "elementName": "consent",
+        "elementSet": "data",
+        "elementPath": "consent"
+      },
+      "first_name": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "first_name",
+        "elementName": "first_name",
+        "elementSet": "data",
+        "elementPath": "first_name"
+      },
+      "other_name": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "other_name",
+        "elementName": "other_name",
+        "elementSet": "data",
+        "elementPath": "other_name"
+      },
+      "surname": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "surname",
+        "elementName": "surname",
+        "elementSet": "data",
+        "elementPath": "surname"
+      },
+      "age": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "gender": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "gender",
+        "elementKey": "gender",
+        "elementName": "gender",
+        "elementSet": "data",
+        "elementPath": "gender"
+      },
+      "registration_date": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "elementKey": "registration_date",
+        "elementName": "registration_date",
+        "elementSet": "data",
+        "elementPath": "registration_date"
+      },
+      "photo_consent": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "photo_consent",
+        "elementKey": "photo_consent",
+        "elementName": "photo_consent",
+        "elementSet": "data",
+        "elementPath": "photo_consent"
+      },
+      "photo": {
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "photo_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "photo.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "photo_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "photo.contentType"
+          }
+        },
+        "elementKey": "photo",
+        "elementName": "photo",
+        "elementSet": "data",
+        "elementPath": "photo",
+        "listChildElementKeys": [
+          "photo_contentType",
+          "photo_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "photo_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "photo_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "photo.uriFragment"
+      },
+      "photo_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "photo_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "photo.contentType"
+      },
+      "_id": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_id",
+        "elementName": "_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_id"
+      },
+      "_row_etag": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_etag",
+        "elementName": "_row_etag",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_etag"
+      },
+      "_sync_state": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_sync_state",
+        "elementName": "_sync_state",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_sync_state"
+      },
+      "_conflict_type": {
+        "type": "integer",
+        "isNotNullable": false,
+        "elementKey": "_conflict_type",
+        "elementName": "_conflict_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_conflict_type"
+      },
+      "_default_access": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_default_access"
+      },
+      "_form_id": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_form_id",
+        "elementName": "_form_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_form_id"
+      },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
+      "_locale": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_locale",
+        "elementName": "_locale",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
+      },
+      "_savepoint_type": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_type",
+        "elementName": "_savepoint_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_type"
+      },
+      "_savepoint_timestamp": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_savepoint_timestamp",
+        "elementName": "_savepoint_timestamp",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_timestamp"
+      },
+      "_savepoint_creator": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_creator",
+        "elementName": "_savepoint_creator",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_creator"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "consent",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"consent\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":8},{\"choice_list_name\":\"consent\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":9}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "gender",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"gender\",\"data_value\":\"Female\",\"display\":{\"title\":{\"text\":\"Female\"}},\"_row_num\":11},{\"choice_list_name\":\"gender\",\"data_value\":\"Male\",\"display\":{\"title\":{\"text\":\"Male\"}},\"_row_num\":12}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "photo_consent",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"photo_consent\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":23},{\"choice_list_name\":\"photo_consent\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":24}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "person"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"en\":\"New Person\",\"default\":\"New Person\"}}"
+      }
+    ]
+  }
+}

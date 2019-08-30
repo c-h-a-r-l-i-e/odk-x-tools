@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!--Menu-->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="css/lsp-homescreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="commonDefinitions.js"></script>
+        <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="libs/jquery-migrate-3.0.0.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript">
+
+        // Displays homescreen
+        function display() {
+            /* Register new household option that launches new household survey */
+            var newForm = document.createElement("button");
+            newForm.setAttribute("id", "button1");
+            newForm.innerHTML = "New Form";
+
+            newForm.onclick = function() {
+                odkTables.openTableToListView(null,
+                    'person',
+                    null,
+                    null,
+                    'config/tables/person/html/person_list.html');
+            }
+            document.getElementById("wrapper").appendChild(newForm);    
+
+            // Send data option that luanches send finalized forms screen in
+            // Collect
+            var sendData = document.createElement("button");
+            sendData.setAttribute("id", "button3");
+            sendData.innerHTML = "Send Forms";
+            sendData.onclick = function() {
+              odkCommon.doAction(null, "org.opendatakit.services.sync.actions.activities.SyncActivity", {"componentPackage": "org.opendatakit.services", "componentActivity": "org.opendatakit.services.sync.actions.activities.SyncActivity"});
+            }
+            document.getElementById("wrapper").appendChild(sendData);
+        }
+        
+        </script>
+    </head>
+
+    <body onload="display();">
+        <h1>LSP Study</h1>
+        <div id="wrapper"></div>
+    </body>
+</html>

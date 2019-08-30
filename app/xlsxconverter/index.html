@@ -1,0 +1,491 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!-- Author: mitchellsundt@gmail.com -->
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<title>Generate Stub XForm for Upload to ODK Aggregate</title>
+<!-- Conversion script for generating ODK1 Aggregate XForms definitions that 
+will allow ODK Survey to upload submissions to the ODK1 Aggregate server
+data processing path.  This enables forward migration of the device application
+to ODK Survey for flat forms without repeat groups. 
+
+To use, place your formDef.json files in separate directories ending in '-media'
+The script will search for formDef.json files in each such named directory, open
+that file, parse it, and synthesize a directoryName.xml file. The resulting 
+processed files can be uploaded using FormUploader into ODK1 Aggregate.
+-->
+<style type="text/css">
+/*<![CDATA[*/
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    font-size: 20px;
+}
+#drop{
+    background-color: white;
+    border:2px dashed #bbb;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    padding:25px;
+    text-align:center;
+    font:20pt bold;
+    color:#bbb
+}
+#browse {
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 1em;
+}
+#out{
+    clear: both;
+	padding: 10px;
+    height: 60%;
+    width: 100%;
+}
+.save-button {
+    float: right;
+    font-size: 20px;
+	font-weight: bold;
+    margin-top: 15px;
+}
+#errors p {
+    background-color: pink;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: .5em;
+}
+#warnings p {
+    background-color: orange;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: .5em;
+}
+.panel {
+    background-color: #f5f5f5;
+    padding: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+.input {
+	margin-top: 10px;
+    padding-left: .5em;
+    font-size: 20px;
+}
+/*]]>*/
+</style>
+<script type="text/javascript" src="js-xlsx/jszip.js"></script>
+<script type="text/javascript" src="js-xlsx/xlsx.js"></script>
+<script type="text/javascript" src="XRegExp-All-3.0.0-pre-2014-12-24.js"></script>
+<script type="text/javascript" src="underscore.js"></script>
+<script type="text/javascript" src="XLSXConverter2.js"></script>
+<script type="text/javascript" src="../devEnv/js/devenv.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var util = require('devenv-util');
+
+function to_json(workbook) {
+    var result = {};
+    _.each(workbook.SheetNames, function(sheetName) {
+        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName],{raw:true});
+        rObjArr = util.removeEmptyStrings(rObjArr);
+        if(rObjArr.length > 0){
+            result[sheetName] =  rObjArr;
+        }
+    });
+    return result;
+}
+
+function clear_output() {
+    window.formDef = null;
+    var out = document.getElementById("out");
+    if(out.innerHTML === undefined){
+        out.textContent = 'Loading...';
+    } else {
+        out.innerHTML = 'Loading...';
+    }
+}
+
+function print_output(output) {
+    var out = document.getElementById("out");
+    if(out.innerHTML === undefined){
+        out.textContent = output;
+    } else {
+        out.innerHTML = output;
+    }
+}
+
+
+function handleSave(e) {
+    var formDefStr = window.formDef;
+
+    if (formDefStr === undefined || formDefStr === null) {
+      formDefStr = '';
+    }
+    var formDefJson = JSON.parse(formDefStr);
+	var formDefFile = "data:application/javascript;charset=utf-8," + formDefStr;
+	downloadFormDefJsonFile(formDefFile, "formDef.json");
+	
+    // Generate definition.csv and properties.csv if necessary
+    if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
+
+        // Get the dataTableModel
+        var dtm = formDefJson.specification.dataTableModel;
+
+        // Create and write out definition.csv
+        var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
+        defCsv = "data:text/csv;charset=utf-8," + defCsv;
+        downloadCsvFile(defCsv, "definition.csv");
+
+        // Create and write out properties.csv
+        var propCsv = util.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
+        propCsv = "data:text/csv;charset=utf-8," + propCsv;
+        downloadCsvFile(propCsv, "properties.csv");
+    } 
+	
+	if (util.shouldWriteOutDefinitionsJs(formDefJson)) {
+		var tableId = util.getTableIdFromFormDef(formDefJson);
+
+		if ( tableId === 'framework' ) {
+			var trxFilename = 'frameworkDefinitions.js';
+			// Create and write out frameworkDefinitions.js
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			trxJs = "data:application/javascript;charset=utf-8," + trxJs;
+			downloadTrxFile(trxJs, trxFilename);
+			
+			var trxCmnFilename = 'commonDefinitions.js';
+			// Create and write out commonDefinitions.js
+			var trxCmnJs = util.createDefinitionsJsFromDataTableModel(null, formDefJson);
+			trxCmnJs = "data:application/javascript;charset=utf-8," + trxCmnJs;
+			downloadTrxFile(trxCmnJs, trxCmnFilename);
+			
+		} else {
+			var trxFilename = 'tableSpecificDefinitions.js';
+			// Create and write out tableSpecificDefinitions.js
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			trxJs = "data:application/javascript;charset=utf-8," + trxJs;
+			downloadTrxFile(trxJs, trxFilename);
+		}
+	}
+}
+
+/**
+ * Post the form def to the correct location on the file system.
+ */
+function postFormDef() {
+    var formDef = window.formDef;
+    if (formDef === undefined || formDef === null || formDef === '') {
+      console.log('no formDef content to post.');
+      return;
+    }
+
+    var formDefJson = JSON.parse(formDef);
+    var tableId = util.getTableIdFromFormDef(formDefJson);
+    var formId = util.getFormIdFromFormDef(formDefJson);
+    var canWriteFile =
+      tableId === util.getFrameworkFormId() ||
+      (tableId !== null && formId !== null);
+    if (!canWriteFile) {
+      console.log('form id or table id could not be found, not posting file.');
+      alert(
+          'Cannot post file, invalid tableId or formId.  tableId: ' +
+          tableId +
+          ' and formId: ' +
+          formId);
+    } else {
+      var path;
+	  var shouldWriteDefinitionsJs = false;
+      var shouldWriteDefAndPropCsv = false;
+	  if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
+		shouldWriteDefAndPropCsv = true;
+	  }
+
+	  if (util.shouldWriteOutDefinitionsJs(formDefJson)) {
+		shouldWriteDefinitionsJs = true;
+	  }
+
+      if (tableId === util.getFrameworkFormId()) {
+        // a special case for the framework file, which is reserved.
+        path = util.getRelativePathToFrameworkFormDef(formDefJson);
+      } else {
+        // we're dealing with a formdef that we're assuming must be for a
+        // particular table, if we're going to be saving it automatically.
+        path =
+          'app/config/tables/' +
+          tableId +
+          '/forms/' +
+          formId +
+          '/formDef.json';
+      }
+      console.log('going to write formDef to: ' + path);
+
+      util.postFile(path, formDef, function(err, response, body) {
+        if (err || response.statusCode !== 200) {
+            alert(
+              'Something went wrong! Please save the file manually.');
+        } else {
+            alert('Saved the file to: ' + path);
+        }
+      });
+
+      // Post the definition.csv and properties.csv files 
+      // if necessary
+      if (shouldWriteDefAndPropCsv) {
+        // Get the dataTableModel
+        var dtm = formDefJson.specification.dataTableModel;
+
+        var defPath = 'app/config/tables/' + tableId + '/definition.csv';
+        var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
+        util.postFile(defPath, defCsv, function(err, response, body) {
+            if (err || response.statusCode !== 200) {
+                alert(
+                  'Something went wrong! Please save the file manually.');
+            } else {
+                alert('Saved the file to: ' + defPath);
+            }
+        });
+
+        var propPath = 'app/config/tables/' + tableId + '/properties.csv';
+        var propCsv = util.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
+        util.postFile(propPath, propCsv, function(err, response, body) {
+            if (err || response.statusCode !== 200) {
+                alert(
+                  'Something went wrong! Please save the file manually.');
+            } else {
+                alert('Saved the file to: ' + propPath);
+            }
+        });
+      }
+      if (shouldWriteDefinitionsJs) {
+		var tableId = util.getTableIdFromFormDef(formDefJson);
+		
+		if ( tableId === 'framework' ) {
+			// Create and write out frameworkDefinitions.js
+			var trxPath = util.getRelativePathToFrameworkDefinitionsJs(formDefJson);
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			util.postFile(trxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + trxPath);
+				}
+			});
+			// Create and write out commonDefinitions.js
+			var ctrxPath = util.getRelativePathToCommonDefinitionsJs(formDefJson);
+			var trxJs = util.createDefinitionsJsFromDataTableModel(null, formDefJson);
+			util.postFile(ctrxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + ctrxPath);
+				}
+			});
+		} else {
+			// Create and write out tableSpecificDefinitions.js
+			var trxPath = 'app/config/tables/' + tableId + '/tableSpecificDefinitions.js';
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			util.postFile(trxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + trxPath);
+				}
+			});
+		}
+      }
+    }
+}
+
+function downloadFormDefJsonFile (formDefContent, fileName) {
+    var encodedUri = encodeURI(formDefContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
+}
+
+function downloadCsvFile (csvContent, fileName) {
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
+}
+
+function downloadTrxFile (trxContent, fileName) {
+    var encodedUri = encodeURI(trxContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
+}
+
+//TODO: Test multiple forms
+function handleDrop(e) {
+    var drop = document.getElementById('drop');
+    document.getElementById('browsefile').value = '';
+    e.stopPropagation();
+    e.preventDefault();
+    if ( !drop.disabled ) {
+        var files = e.dataTransfer.files;
+        var f = files[0];
+        if ( f ) {
+            makeReader(f);
+        }
+    } else {
+        alert("drop ignored -- conversion in progress!");
+    }
+}
+
+var wasClicked = false;
+function handleFileChooserClick(e) {
+	var browse = document.getElementById("browsefile");
+
+    // reset the value so that re-selecting the file will trigger a change event...
+    browse.value = '';
+    
+    if ( browse.disabled ) {
+        e.stopPropagation();
+        e.preventDefault();
+        alert("choose file ignored -- conversion in progress!");
+        return;
+    }
+
+    // debounce the file chooser...
+    if ( wasClicked ) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    wasClicked = true;
+    setTimeout(function() {
+        wasClicked = false;
+    }, 1000);
+    return wasClicked;
+}
+
+function handleFileSelect(e) {
+    var files = e.target.files;
+    var f = files[0];
+    if ( f ) {
+        makeReader(f);
+    }
+}
+function enableActions() {
+	var browse = document.getElementById("browsefile");
+    var drop = document.getElementById('drop');
+    browse.disabled = false;
+    drop.disabled = false;
+}
+function makeReader(f) {
+    var reader = new FileReader();
+    var name = f.name;
+    //Clear the warnings and errors:
+    var errorsEl = document.getElementById('errors');
+    while (errorsEl.hasChildNodes()) {
+        errorsEl.removeChild(errorsEl.lastChild);
+    }
+    var warnings = document.getElementById('warnings');
+    while (warnings.hasChildNodes()) {
+        warnings.removeChild(warnings.lastChild);
+    }
+
+    reader.onload = function(e) {
+        var data = e.target.result;
+        var errorEl = document.createElement("p");
+        if(f.name.slice(-3) === "xls"){
+            errorEl.innerHTML = "Sorry, XLS files are not supported.<br />";
+            errorEl.innerHTML += "You can convert your XLS file to XLSX using libreOffice or Google Docs.";
+            errorsEl.appendChild(errorEl);
+            enableActions();
+            /*
+            var cfb = CFB.read(data, {type:'binary'})
+            window.cfbs[name] = cfb;
+            //cfb.Paths.forEach(function(x){console.log(x); out.innerHTML+=x+"\n";});
+            var wb = parse_xlscfb(cfb);
+            var ws = wb.Sheets[wb.Directory[0]]
+            var csv = make_csv(ws);
+            var cmds = get_formulae(ws).join("\n");
+            out.innerHTML+=csv+"\n";
+            */
+        } else {
+             try {
+                var xlsx = XLSX.read(data, {type: 'binary'});
+                var jsonWorkbook = to_json(xlsx);
+                //console.log(jsonWorkbook);
+                var processedWorkbook = XLSXConverter.processJSONWorkbook(jsonWorkbook);
+                window.formDef = JSON.stringify(processedWorkbook, 2, 2);
+                // Add an extra new line character to make output consistent with script
+                window.formDef += '\n';
+                print_output(window.formDef);
+                _.each(XLSXConverter.getWarnings(), function(warning){
+                    var warningEl = document.createElement("p");
+                    warningEl.innerHTML = warning;
+                    console.log(warning);
+                    warnings.appendChild(warningEl);
+                });
+                enableActions();
+            } catch(e) {
+                enableActions();
+                errorEl.innerHTML = String(e);
+                errorsEl.appendChild(errorEl);
+                throw e;
+            }
+        }
+    };
+	
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+
+    try {
+        browse.disabled = true;
+        drop.disabled = true;
+        clear_output();
+        reader.readAsBinaryString(f);
+    } catch(e) {
+        enableActions();
+        errorEl.innerHTML = "Could not read file.";
+        throw e;
+    }    
+}
+
+function handleDragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+}
+
+
+window.onload = function() {
+	var browse = document.getElementById("browsefile");
+	var drop = document.getElementById('drop');
+	browse.addEventListener('click', handleFileChooserClick, false);
+	browse.addEventListener('change', handleFileSelect, false);
+	drop.addEventListener('dragover', handleDragover, false);
+	drop.addEventListener('drop', handleDrop, false);
+	browse.disabled = false;
+}
+//]]>
+</script>
+</head>
+<body class="fullembedded" >
+  <div class="panel">
+	<p>Process your XLSX file into a <tt>formDef.json</tt> file.</p>
+    <div id="drop">Drop an XLSX file here to convert to JSON.</div>
+  </div>
+  <div id="browse">
+    Select an XLSX file from which to generate a <tt>formDef.json</tt> file<br/><input class="input" type="file" id="browsefile" disabled="true"/>
+  </div>
+  <div id="errors"></div>
+  <div id="warnings"></div>
+
+  <div class="panel">
+    <button class="save-button" onclick="postFormDef();" id="write-formdef">Save to File System</button>
+    <button class="save-button" onclick="handleSave();" id="save">Save</button>
+    <p>Output (to be saved as <tt>formDef.json</tt>):</p>
+    <textarea id="out"></textarea>
+  </div>
+</body>
+</html>
