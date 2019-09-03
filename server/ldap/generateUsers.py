@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!\\usr\\bin\\env python3
 
 """
 Author: Charlie Maclean
@@ -54,7 +54,7 @@ objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: top
 userPassword: {{md5}}{2}
-homeDirectory: /home/users/{0}
+homeDirectory: \\home\\users\\{0}
 """.format(self.username, self.usernumber, self.getPasswordHash())
         return out
 

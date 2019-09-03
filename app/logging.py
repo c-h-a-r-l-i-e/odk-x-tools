@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!\\usr\\bin\\python3
 import sys
 from openpyxl import load_workbook
 import os
@@ -209,7 +209,7 @@ class Form:
         if formId == None:
             raise ValueError("Settings sheet in workbook {} must define a value for form_id".format(self.filename))
 
-        fileName = "designerFiles\app\config\tables\{0}\forms\{1}\{1}.xlsx".format(tableId, formId)
+        fileName = "designerFiles\\app\\config\\tables\\{0}\\forms\\{1}\\{1}.xlsx".format(tableId, formId)
 
         return fileName
 
@@ -218,9 +218,9 @@ def getWorkbooks():
     subDirs = os.listdir("forms")
     workbooks = []
     for directory in subDirs:
-        for f in os.listdir("forms\{}".format(directory)):
+        for f in os.listdir("forms\\{}".format(directory)):
             if f[-5:] == ".xlsx":
-                workbooks.append("forms\{}\{}".format(directory, f))
+                workbooks.append("forms\\{}\\{}".format(directory, f))
     return workbooks
 
 
@@ -234,4 +234,4 @@ if __name__ == "__main__":
         except Exception as e:
             print("Converting failed due to: {}".format(e))
 
-    os.system("grunt --gruntfile designerFiles\Gruntfile.js xlsx-convert-all")
+    os.system("grunt --gruntfile designerFiles\\Gruntfile.js xlsx-convert-all")
