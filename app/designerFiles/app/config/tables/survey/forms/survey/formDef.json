@@ -242,7 +242,7 @@
         "type": "note",
         "display": {
           "prompt": {
-            "text": "2004 &#8211; 15\\n\n2003 - 16\n2002 - 17\n2001 - 18\n2000 - 19\n1999 - 20\n1998 - 21\n1997 - 22\n1996 - 23\n1995 - 24\n1994 - 25\n1993 - 26\n1992 - 27\n1991 - 28\n1990 - 29\n1989 - 30\n1988 - 31\n1987 - 32\n1986 - 33\n1985 - 34\n1984 - 35\n1983 - 36\n1982 - 37\n1981 - 38\n1980 - 39\n1979 - 40\n1978 - 41\n1977 - 42\n1976 - 43\n1975 - 44\n1974 - 45\n1973 - 46\n1972 - 47\n1971 - 48\n1970 - 49\n1969 - 50\n1968 - 51\n1967 - 52\n1966 - 53\n1965 - 54\n1964 - 55\n1963 - 56\n1962 - 57\n1961 - 58\n1960 - 59\n1959 - 60\n1958 - 61\n1957 - 62\n1956 - 63\n1955 - 64\n1954 - 65\n1953 - 66\n1952 - 67\n1951 - 68\n1950 - 69\n1949 - 70\n1948 - 71\n1947 - 72\n1946 - 73\n1945 - 74\n1944 - 75\n1943 - 76\n1942 - 77\n1941 - 78\n1940 - 79\n1939 - 80\n1938 - 81\n1937 - 82\n1936 - 83\n1935 - 84\n1934 - 85\n1933 - 86\n1932 - 87\n1931 - 88\n1930 - 89\n1929 - 90\n1928 - 91\n1927 - 92\n1926 - 93\n1925 - 94\n1924 - 95\n1923 - 96\n1922 - 97\n1921 - 98\n1920 - 99\n1919 - 100\n1918 - 101\n1917 - 102\n1916 - 103\n1915 - 104\n1914 - 105\n1913 - 106\n1912 - 107\n1911 - 108\n1910 - 109\n1909 - 110\n1908 - 111\n1907 - 112\n1906 - 113\n1905 - 114\n1904 - 115\n1903 - 116\n1902 - 117\n1901 - 118\n1900 - 119"
+            "text": "2004 – 15\\n\n2003 - 16\n2002 - 17\n2001 - 18\n2000 - 19\n1999 - 20\n1998 - 21\n1997 - 22\n1996 - 23\n1995 - 24\n1994 - 25\n1993 - 26\n1992 - 27\n1991 - 28\n1990 - 29\n1989 - 30\n1988 - 31\n1987 - 32\n1986 - 33\n1985 - 34\n1984 - 35\n1983 - 36\n1982 - 37\n1981 - 38\n1980 - 39\n1979 - 40\n1978 - 41\n1977 - 42\n1976 - 43\n1975 - 44\n1974 - 45\n1973 - 46\n1972 - 47\n1971 - 48\n1970 - 49\n1969 - 50\n1968 - 51\n1967 - 52\n1966 - 53\n1965 - 54\n1964 - 55\n1963 - 56\n1962 - 57\n1961 - 58\n1960 - 59\n1959 - 60\n1958 - 61\n1957 - 62\n1956 - 63\n1955 - 64\n1954 - 65\n1953 - 66\n1952 - 67\n1951 - 68\n1950 - 69\n1949 - 70\n1948 - 71\n1947 - 72\n1946 - 73\n1945 - 74\n1944 - 75\n1943 - 76\n1942 - 77\n1941 - 78\n1940 - 79\n1939 - 80\n1938 - 81\n1937 - 82\n1936 - 83\n1935 - 84\n1934 - 85\n1933 - 86\n1932 - 87\n1931 - 88\n1930 - 89\n1929 - 90\n1928 - 91\n1927 - 92\n1926 - 93\n1925 - 94\n1924 - 95\n1923 - 96\n1922 - 97\n1921 - 98\n1920 - 99\n1919 - 100\n1918 - 101\n1917 - 102\n1916 - 103\n1915 - 104\n1914 - 105\n1913 - 106\n1912 - 107\n1911 - 108\n1910 - 109\n1909 - 110\n1908 - 111\n1907 - 112\n1906 - 113\n1905 - 114\n1904 - 115\n1903 - 116\n1902 - 117\n1901 - 118\n1900 - 119"
           }
         },
         "_row_num": 38
@@ -2031,7 +2031,7 @@
         "name": "Lassa_socioeconomic_impact",
         "display": {
           "prompt": {
-            "text": "99. What impact has the sickness had on your socio-economic status&#160;?"
+            "text": "99. What impact has the sickness had on your socio-economic status ?"
           }
         },
         "_row_num": 313
@@ -2836,7 +2836,7 @@
         "name": "hhsurv_Lassa_socioeconomic_impact",
         "display": {
           "prompt": {
-            "text": "138. What impact has the sickness had on your socio-economic status&#160;?"
+            "text": "138. What impact has the sickness had on your socio-economic status ?"
           }
         },
         "_row_num": 427
@@ -5785,7 +5785,7 @@
         "data_value": "Does_not_know",
         "display": {
           "title": {
-            "text": "I don&#8217;t know"
+            "text": "I don’t know"
           }
         },
         "_row_num": 134
@@ -5862,7 +5862,7 @@
       },
       {
         "choice_list_name": "hospital_admission",
-        "data_value": "&#8804; 2wks",
+        "data_value": "≤ 2wks",
         "display": {
           "title": {
             "text": "Less than (or equal to) 2 weeks"
@@ -6675,7 +6675,7 @@
         "data_value": "Does_not_know",
         "display": {
           "title": {
-            "text": "Can&#8217;t remember"
+            "text": "Can’t remember"
           }
         },
         "_row_num": 264
@@ -7682,7 +7682,7 @@
       },
       {
         "choice_list_name": "hhsurv_hospital_admission",
-        "data_value": "&#8804;2wks",
+        "data_value": "≤2wks",
         "display": {
           "title": {
             "text": "Less than (or equal to) 2 wks"
@@ -10331,7 +10331,7 @@
           "data_value": "Does_not_know",
           "display": {
             "title": {
-              "text": "I don&#8217;t know"
+              "text": "I don’t know"
             }
           },
           "_row_num": 134
@@ -10416,7 +10416,7 @@
       "hospital_admission": [
         {
           "choice_list_name": "hospital_admission",
-          "data_value": "&#8804; 2wks",
+          "data_value": "≤ 2wks",
           "display": {
             "title": {
               "text": "Less than (or equal to) 2 weeks"
@@ -11279,7 +11279,7 @@
           "data_value": "Does_not_know",
           "display": {
             "title": {
-              "text": "Can&#8217;t remember"
+              "text": "Can’t remember"
             }
           },
           "_row_num": 264
@@ -12356,7 +12356,7 @@
       "hhsurv_hospital_admission": [
         {
           "choice_list_name": "hhsurv_hospital_admission",
-          "data_value": "&#8804;2wks",
+          "data_value": "≤2wks",
           "display": {
             "title": {
               "text": "Less than (or equal to) 2 wks"
@@ -17657,7 +17657,7 @@
             "type": "note",
             "display": {
               "prompt": {
-                "text": "2004 &#8211; 15\\n\n2003 - 16\n2002 - 17\n2001 - 18\n2000 - 19\n1999 - 20\n1998 - 21\n1997 - 22\n1996 - 23\n1995 - 24\n1994 - 25\n1993 - 26\n1992 - 27\n1991 - 28\n1990 - 29\n1989 - 30\n1988 - 31\n1987 - 32\n1986 - 33\n1985 - 34\n1984 - 35\n1983 - 36\n1982 - 37\n1981 - 38\n1980 - 39\n1979 - 40\n1978 - 41\n1977 - 42\n1976 - 43\n1975 - 44\n1974 - 45\n1973 - 46\n1972 - 47\n1971 - 48\n1970 - 49\n1969 - 50\n1968 - 51\n1967 - 52\n1966 - 53\n1965 - 54\n1964 - 55\n1963 - 56\n1962 - 57\n1961 - 58\n1960 - 59\n1959 - 60\n1958 - 61\n1957 - 62\n1956 - 63\n1955 - 64\n1954 - 65\n1953 - 66\n1952 - 67\n1951 - 68\n1950 - 69\n1949 - 70\n1948 - 71\n1947 - 72\n1946 - 73\n1945 - 74\n1944 - 75\n1943 - 76\n1942 - 77\n1941 - 78\n1940 - 79\n1939 - 80\n1938 - 81\n1937 - 82\n1936 - 83\n1935 - 84\n1934 - 85\n1933 - 86\n1932 - 87\n1931 - 88\n1930 - 89\n1929 - 90\n1928 - 91\n1927 - 92\n1926 - 93\n1925 - 94\n1924 - 95\n1923 - 96\n1922 - 97\n1921 - 98\n1920 - 99\n1919 - 100\n1918 - 101\n1917 - 102\n1916 - 103\n1915 - 104\n1914 - 105\n1913 - 106\n1912 - 107\n1911 - 108\n1910 - 109\n1909 - 110\n1908 - 111\n1907 - 112\n1906 - 113\n1905 - 114\n1904 - 115\n1903 - 116\n1902 - 117\n1901 - 118\n1900 - 119"
+                "text": "2004 – 15\\n\n2003 - 16\n2002 - 17\n2001 - 18\n2000 - 19\n1999 - 20\n1998 - 21\n1997 - 22\n1996 - 23\n1995 - 24\n1994 - 25\n1993 - 26\n1992 - 27\n1991 - 28\n1990 - 29\n1989 - 30\n1988 - 31\n1987 - 32\n1986 - 33\n1985 - 34\n1984 - 35\n1983 - 36\n1982 - 37\n1981 - 38\n1980 - 39\n1979 - 40\n1978 - 41\n1977 - 42\n1976 - 43\n1975 - 44\n1974 - 45\n1973 - 46\n1972 - 47\n1971 - 48\n1970 - 49\n1969 - 50\n1968 - 51\n1967 - 52\n1966 - 53\n1965 - 54\n1964 - 55\n1963 - 56\n1962 - 57\n1961 - 58\n1960 - 59\n1959 - 60\n1958 - 61\n1957 - 62\n1956 - 63\n1955 - 64\n1954 - 65\n1953 - 66\n1952 - 67\n1951 - 68\n1950 - 69\n1949 - 70\n1948 - 71\n1947 - 72\n1946 - 73\n1945 - 74\n1944 - 75\n1943 - 76\n1942 - 77\n1941 - 78\n1940 - 79\n1939 - 80\n1938 - 81\n1937 - 82\n1936 - 83\n1935 - 84\n1934 - 85\n1933 - 86\n1932 - 87\n1931 - 88\n1930 - 89\n1929 - 90\n1928 - 91\n1927 - 92\n1926 - 93\n1925 - 94\n1924 - 95\n1923 - 96\n1922 - 97\n1921 - 98\n1920 - 99\n1919 - 100\n1918 - 101\n1917 - 102\n1916 - 103\n1915 - 104\n1914 - 105\n1913 - 106\n1912 - 107\n1911 - 108\n1910 - 109\n1909 - 110\n1908 - 111\n1907 - 112\n1906 - 113\n1905 - 114\n1904 - 115\n1903 - 116\n1902 - 117\n1901 - 118\n1900 - 119"
               }
             },
             "_row_num": 38,
@@ -18985,7 +18985,7 @@
             "name": "Lassa_socioeconomic_impact",
             "display": {
               "prompt": {
-                "text": "99. What impact has the sickness had on your socio-economic status&#160;?"
+                "text": "99. What impact has the sickness had on your socio-economic status ?"
               }
             },
             "_row_num": 313,
@@ -19588,7 +19588,7 @@
             "name": "hhsurv_Lassa_socioeconomic_impact",
             "display": {
               "prompt": {
-                "text": "138. What impact has the sickness had on your socio-economic status&#160;?"
+                "text": "138. What impact has the sickness had on your socio-economic status ?"
               }
             },
             "_row_num": 427,
@@ -32198,7 +32198,7 @@
         "_aspect": "hhsurv_hospital_admission",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"hhsurv_hospital_admission\",\"data_value\":\"&#8804;2wks\",\"display\":{\"title\":{\"text\":\"Less than (or equal to) 2 wks\"}},\"_row_num\":415},{\"choice_list_name\":\"hhsurv_hospital_admission\",\"data_value\":\">2wks\",\"display\":{\"title\":{\"text\":\"More than 2 wks\"}},\"_row_num\":416}]"
+        "_value": "[{\"choice_list_name\":\"hhsurv_hospital_admission\",\"data_value\":\"≤2wks\",\"display\":{\"title\":{\"text\":\"Less than (or equal to) 2 wks\"}},\"_row_num\":415},{\"choice_list_name\":\"hhsurv_hospital_admission\",\"data_value\":\">2wks\",\"display\":{\"title\":{\"text\":\"More than 2 wks\"}},\"_row_num\":416}]"
       },
       {
         "_partition": "Column",
@@ -32282,7 +32282,7 @@
         "_aspect": "hospital_admission",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"hospital_admission\",\"data_value\":\"&#8804; 2wks\",\"display\":{\"title\":{\"text\":\"Less than (or equal to) 2 weeks\"}},\"_row_num\":149},{\"choice_list_name\":\"hospital_admission\",\"data_value\":\">2wks\",\"display\":{\"title\":{\"text\":\"More than 2 weeks\"}},\"_row_num\":150}]"
+        "_value": "[{\"choice_list_name\":\"hospital_admission\",\"data_value\":\"≤ 2wks\",\"display\":{\"title\":{\"text\":\"Less than (or equal to) 2 weeks\"}},\"_row_num\":149},{\"choice_list_name\":\"hospital_admission\",\"data_value\":\">2wks\",\"display\":{\"title\":{\"text\":\"More than 2 weeks\"}},\"_row_num\":150}]"
       },
       {
         "_partition": "Column",
@@ -32310,7 +32310,7 @@
         "_aspect": "how_prevent",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Rats_away\",\"display\":{\"title\":{\"text\":\"Keep rats away\"}},\"_row_num\":129},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Hygiene\",\"display\":{\"title\":{\"text\":\"Personal hygiene\"}},\"_row_num\":130},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Vaccine\",\"display\":{\"title\":{\"text\":\"Vaccine\"}},\"_row_num\":131},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Prayer\",\"display\":{\"title\":{\"text\":\"Prayers\"}},\"_row_num\":132},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"No_bush_meat\",\"display\":{\"title\":{\"text\":\"Not eating bush meat\"}},\"_row_num\":133},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Does_not_know\",\"display\":{\"title\":{\"text\":\"I don&#8217;t know\"}},\"_row_num\":134},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Other\",\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":135}]"
+        "_value": "[{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Rats_away\",\"display\":{\"title\":{\"text\":\"Keep rats away\"}},\"_row_num\":129},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Hygiene\",\"display\":{\"title\":{\"text\":\"Personal hygiene\"}},\"_row_num\":130},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Vaccine\",\"display\":{\"title\":{\"text\":\"Vaccine\"}},\"_row_num\":131},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Prayer\",\"display\":{\"title\":{\"text\":\"Prayers\"}},\"_row_num\":132},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"No_bush_meat\",\"display\":{\"title\":{\"text\":\"Not eating bush meat\"}},\"_row_num\":133},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Does_not_know\",\"display\":{\"title\":{\"text\":\"I don’t know\"}},\"_row_num\":134},{\"choice_list_name\":\"how_prevent\",\"data_value\":\"Other\",\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":135}]"
       },
       {
         "_partition": "Column",
@@ -32380,7 +32380,7 @@
         "_aspect": "last_fever",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"last_fever\",\"data_value\":\"Lassa_most_recent_fever\",\"display\":{\"title\":{\"text\":\"Last fever was Lassa fever\"}},\"_row_num\":260},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Under_1mon\",\"display\":{\"title\":{\"text\":\"Less than 1 month ago\"}},\"_row_num\":261},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Between_1_to_12mon\",\"display\":{\"title\":{\"text\":\"About 1-12 months ago\"}},\"_row_num\":262},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Over_12mon\",\"display\":{\"title\":{\"text\":\"Greater than 12 months ago\"}},\"_row_num\":263},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Does_not_know\",\"display\":{\"title\":{\"text\":\"Can&#8217;t remember\"}},\"_row_num\":264}]"
+        "_value": "[{\"choice_list_name\":\"last_fever\",\"data_value\":\"Lassa_most_recent_fever\",\"display\":{\"title\":{\"text\":\"Last fever was Lassa fever\"}},\"_row_num\":260},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Under_1mon\",\"display\":{\"title\":{\"text\":\"Less than 1 month ago\"}},\"_row_num\":261},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Between_1_to_12mon\",\"display\":{\"title\":{\"text\":\"About 1-12 months ago\"}},\"_row_num\":262},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Over_12mon\",\"display\":{\"title\":{\"text\":\"Greater than 12 months ago\"}},\"_row_num\":263},{\"choice_list_name\":\"last_fever\",\"data_value\":\"Does_not_know\",\"display\":{\"title\":{\"text\":\"Can’t remember\"}},\"_row_num\":264}]"
       },
       {
         "_partition": "Column",

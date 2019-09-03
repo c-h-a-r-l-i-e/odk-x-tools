@@ -630,3 +630,18 @@ Eventually we should make a jqm theme for this.
     overflow:hidden;
     margin-right:50px;
 }
+
+.odk-options-btn {
+    pointer-events:none;
+    border:none;
+    background:none;
+}
+
+.finalize {
+    width: 200%;
+    margin-left: 10%;
+}
+
+.incomplete {
+    display: none;
+}

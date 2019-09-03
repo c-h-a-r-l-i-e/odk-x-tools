@@ -11,11 +11,6 @@ def installApps():
     for app in getApps():
         os.system("adb install {}".format(app))
 
-def setupODK():
-
-    os.system("grunt --gruntfile designerFiles/Gruntfile.js xlsx-convert-all")
-
 if __name__ == "__main__":
     installApps()
-    os.system("grunt --gruntfile designerFiles/Gruntfile.js xlsx-convert-all")
-    os.system("grunt --gruntfile designerFiles/Gruntfile.js adbpush")
+    os.system("grunt --gruntfile designerFiles/Gruntfile.js clean")
