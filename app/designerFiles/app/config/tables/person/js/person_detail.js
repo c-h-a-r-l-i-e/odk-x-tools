@@ -11,11 +11,23 @@ function goBack() {
     odkCommon.closeWindow();
 }
 
+// Returns a function to add a new row
+function createClickFunction(form, elementKeyToValueMapId) {
+    return function() {
+        odkTables.addRowWithSurvey(
+                null,
+                form.tableId,
+                form.formId,
+                null,
+                elementKeyToValueMapId);
+    };
+}
+
+
 // Displays details about people and links to survey form
 function display(result) {
     console.log(result.get('photo'));
 
-    // Details - Person id, age
     personId = result.get('id');
 
     var firstName = result.get('first_name');
@@ -32,40 +44,19 @@ function display(result) {
     var date = result.get('registration_date').substring(0,10);
     document.getElementById('regdate').innerHTML = date.substring(8,10) + '/' + date.substring(5,7) + '/' + date.substring(0, 4);
 
-
     // Creates key-to-value map that can be interpreted by the specified
     // survey form - to prepopulate forms with person id
     var elementKeyToValueMapId = {person_id: personId};
 
-    // Create button which will launch a new survey with person ID supplied
-    var newSurveyBtn = document.createElement('p');
-    newSurveyBtn.innerHTML = 'New Survey';
-    newSurveyBtn.setAttribute('class', 'forms');
-    newSurveyBtn.onclick = function() {
-        odkTables.addRowWithSurvey(
-				null,
-                'survey',
-                'survey',
-                null,
-                elementKeyToValueMapId);
-    };
-
-    document.getElementById('wrapper').appendChild(newSurveyBtn);
-
-    // Create button which will launch a new sample with person ID supplied
-    var newSampleBtn = document.createElement('p');
-    newSampleBtn.innerHTML = 'New Biological Sample';
-    newSampleBtn.setAttribute('class', 'forms');
-    newSampleBtn.onclick = function() {
-        odkTables.addRowWithSurvey(
-				null,
-                'sample',
-                'sample',
-                null,
-                elementKeyToValueMapId);
-    };
-
-    document.getElementById('wrapper').appendChild(newSampleBtn);
+    for (var i = 0; i < forms.length; i++) {
+        var form = forms[i];
+        // Create button which will launch a new form with person ID supplied
+        var newFormButton = document.createElement('p');
+        newFormButton.innerHTML = form.label;
+        newFormButton.setAttribute('class', 'forms');
+        newFormButton.onclick = createClickFunction(form, elementKeyToValueMapId);
+        document.getElementById('wrapper').appendChild(newFormButton);
+    }
 }
 
 function cbSuccess(result) {

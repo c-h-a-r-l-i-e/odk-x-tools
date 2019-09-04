@@ -1,0 +1,1 @@
+var forms = [{"formId":"survey", "tableId":"survey", "label":"New Survey"},{"formId":"sample", "tableId":"sample", "label":"New Sample"}]

@@ -8,10 +8,16 @@ import os
 LOG_COLUMN_NUMBER = 20
 CHARS_PER_LOG = 60000
 
+#List tables we mark as linked to persons - i.e. the forms for these tables will be included in the list of buttons on a person's page
+PERSON_TABLES = ['survey', 'sample']
+
 class Form:
     def __init__(self, filename):
         self.filename = filename
         self.workbook = load_workbook(filename = filename)
+        self.formId = self.getFormId()
+        self.tableId = self.getTableId()
+        self.title = self.getTitle()
 
 
     def convert(self):
@@ -171,7 +177,7 @@ class Form:
         self.workbook.save(self.getFileName())
 
 
-    def getFileName(self):
+    def getTableId(self):
         try:
             ws = self.workbook['settings'] #Catch error when settings does not exist
         except:
@@ -179,39 +185,92 @@ class Form:
 
         settingIndex = -1
         valueIndex = -1
-
         for i in range(1, ws.max_column + 1):
             if ws.cell(1, i).value == "setting_name":
                 settingIndex = i
-
             elif ws.cell(1, i).value == "value":
                 valueIndex = i
 
         if settingIndex < 0:
             raise ValueError("Settings sheet in workbook {} must have a column named 'setting_name'".format(self.filename))
-
         if valueIndex < 0:
             raise ValueError("Settings sheet in workbook {} must have a column named 'value'".format(self.filename))
 
         tableId = None
-        formId = None
-        
         for i in range(1, ws.max_row + 1):
             if ws.cell(i, settingIndex).value == "table_id":
                 tableId = ws.cell(i, valueIndex).value
-
-            elif ws.cell(i, settingIndex).value == "form_id":
-                formId = ws.cell(i, valueIndex).value
-
         if tableId == None:
             raise ValueError("Settings sheet in workbook {} must define a value for table_id".format(self.filename))
 
+        return tableId
+    
+
+    def getFormId(self):
+        try:
+            ws = self.workbook['settings'] #Catch error when settings does not exist
+        except:
+            raise ValueError("Workbook {} must have a sheet named 'settings'".format(self.filename))
+
+        settingIndex = -1
+        valueIndex = -1
+        for i in range(1, ws.max_column + 1):
+            if ws.cell(1, i).value == "setting_name":
+                settingIndex = i
+            elif ws.cell(1, i).value == "value":
+                valueIndex = i
+
+        if settingIndex < 0:
+            raise ValueError("Settings sheet in workbook {} must have a column named 'setting_name'".format(self.filename))
+        if valueIndex < 0:
+            raise ValueError("Settings sheet in workbook {} must have a column named 'value'".format(self.filename))
+
+        formId = None
+        for i in range(1, ws.max_row + 1):
+            if ws.cell(i, settingIndex).value == "form_id":
+                formId = ws.cell(i, valueIndex).value
         if formId == None:
             raise ValueError("Settings sheet in workbook {} must define a value for form_id".format(self.filename))
 
-        fileName = "designerFiles\\app\\config\\tables\\{0}\\forms\\{1}\\{1}.xlsx".format(tableId, formId)
+        return formId
 
+
+    def getTitle(self):
+        try:
+            ws = self.workbook['settings'] #Catch error when settings does not exist
+        except:
+            raise ValueError("Workbook {} must have a sheet named 'settings'".format(self.filename))
+
+        settingIndex = -1
+        displayIndex = -1
+        for i in range(1, ws.max_column + 1):
+            if ws.cell(1, i).value == "setting_name":
+                settingIndex = i
+            elif ws.cell(1, i).value == "display.title.text.en":
+                displayIndex = i
+
+        if settingIndex < 0:
+            raise ValueError("Settings sheet in workbook {} must have a column named 'setting_name'".format(self.filename))
+        if displayIndex < 0:
+            raise ValueError("Settings sheet in workbook {} must have a column named 'display.title.text.en'".format(self.filename))
+
+        title = None
+        for i in range(1, ws.max_row + 1):
+            if ws.cell(i, settingIndex).value == "survey":
+                title = ws.cell(i, displayIndex).value
+        if title == None:
+            raise ValueError("Settings sheet in workbook {} must define column display.title.text.en for row survey".format(self.filename))
+
+        return title
+
+
+    def getFileName(self):
+        fileName = "designerFiles\\app\\config\\tables\\{0}\\forms\\{1}\\{1}.xlsx".format(self.tableId, self.formId)
         return fileName
+
+    def getJsRepresentation(self):
+        js = '{{"formId":"{}", "tableId":"{}", "label":"{}"}}'.format(self.formId, self.tableId, self.title)
+        return js
 
         
 def getWorkbooks():
@@ -224,14 +283,26 @@ def getWorkbooks():
     return workbooks
 
 
+def writeJs(content):
+    js = "var forms = [{}]".format(','.join(content))
+    with open("designerFiles\\app\\config\\tables\\person\\js\\forms.json", "w") as jsFile:
+        jsFile.write(js)
+
+
 if __name__ == "__main__":
+    # This javascript describes the forms we want to show in an individual's menu
+    jsContent = []
     for workbook in getWorkbooks():
         try:
             print("Converting {}".format(workbook))
             form = Form(workbook)
             form.convert()
+            if form.tableId in PERSON_TABLES:
+                jsContent.append(form.getJsRepresentation())
             print("Done")
         except Exception as e:
             print("Converting failed due to: {}".format(e))
+
+    writeJs(jsContent)
 
     os.system("grunt --gruntfile designerFiles\\Gruntfile.js xlsx-convert-all")
