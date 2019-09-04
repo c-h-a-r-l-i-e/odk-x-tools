@@ -1,1 +1,1 @@
-var forms = [{"formId":"survey", "tableId":"survey", "label":"New Survey"},{"formId":"sample", "tableId":"sample", "label":"New Sample"}]
+var forms = [{"formId":"sample", "tableId":"sample", "label":"New Sample"},{"formId":"survey", "tableId":"survey", "label":"New Survey"}]
