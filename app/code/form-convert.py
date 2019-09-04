@@ -174,6 +174,8 @@ class Form:
             model.cell(newRow, elementTypeIndex, "string({})".format(CHARS_PER_LOG))
         
         print("Saving as {}".format(self.getFileName()))
+        
+        os.makedirs(os.path.dirname(self.getFileName()), exist_ok=True)
         self.workbook.save(self.getFileName())
 
 
@@ -285,7 +287,7 @@ def getWorkbooks():
 
 def writeJs(content):
     js = "var forms = [{}]".format(','.join(content))
-    with open("designerFiles\\app\\config\\tables\\person\\js\\forms.json", "w") as jsFile:
+    with open("designerFiles\\app\\config\\tables\\person\\js\\forms.json", "w+") as jsFile:
         jsFile.write(js)
 
 
