@@ -279,7 +279,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ["adbpull-props", "remove-folders", 'adbpush-collect', 'adbpush-default-app', "adbpush-props"]);
+        ["remove-folders", 'adbpush-collect', 'adbpush-default-app', "adbpush-props"]);
 
     grunt.registerTask(
         'clean',
