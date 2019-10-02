@@ -177,9 +177,10 @@ function render() {
     // Set up fuzzy searching using Fuse.js
     var options = {
         shouldSort: true,
-        threshold: 0.6,
+        threshold: 0.3,
+        tokenize: true,
         location: 0,
-        distance: 100,
+        distance: 0,
         maxPatternLength: 32,
         minMatchCharLength: 1,
         keys: [
