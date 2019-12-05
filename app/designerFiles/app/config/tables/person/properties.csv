@@ -8,4 +8,4 @@ Column,p_lassa,displayChoicesList,object,"[{""choice_list_name"":""p_lassa"",""d
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,person
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":{""en"":""New Person"",""default"":""New Person""}}"
+Table,default,displayName,object,"{""text"":{""en"":""New Person Registration"",""default"":""New Person Registration""}}"
