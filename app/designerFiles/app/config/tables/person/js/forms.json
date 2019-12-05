@@ -1,1 +1,1 @@
-var forms = [{"formId":"rodent", "tableId":"rodent", "label":"New Rodent Trapping Survey"},{"formId":"sample", "tableId":"sample", "label":"New Sample"},{"formId":"survey", "tableId":"survey", "label":"New Survey"}]
+var forms = [{"formId":"gps-mop-up", "tableId":"gps-mop-up", "label":"New GPS Point Collection"},{"formId":"rodent", "tableId":"rodent", "label":"New Rodent Trapping Survey"},{"formId":"sample", "tableId":"sample", "label":"New Biological Sample"},{"formId":"survey", "tableId":"survey", "label":"New Survey"}]

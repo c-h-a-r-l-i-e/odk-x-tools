@@ -9,7 +9,7 @@ LOG_COLUMN_NUMBER = 20
 CHARS_PER_LOG = 60000
 
 #List tables we mark as linked to persons - i.e. the forms for these tables will be included in the list of buttons on a person's page
-PERSON_TABLES = ['survey', 'sample', 'rodent']
+PERSON_TABLES = ['survey', 'sample', 'rodent', 'gps-mop-up']
 
 class Form:
     def __init__(self, filename):
