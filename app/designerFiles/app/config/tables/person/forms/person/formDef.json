@@ -19,7 +19,7 @@
         "name": "interviewer_name",
         "display": {
           "prompt": {
-            "text": "1. What is the name of the interviewer?"
+            "text": "What is the name of the interviewer?"
           }
         },
         "required": 1,
@@ -63,7 +63,7 @@
         "name": "consent",
         "display": {
           "prompt": {
-            "text": "2. I'd like to ask you questions in order to help us conduct research in hopes to improve healthcare for Lassa fever. Redeemer University, the University of Cambridge, and our partners may have access to this information, including your current location. .  Note that you may withdraw your permission at any time and ask for your data to be erased. Choosing to not participate will in no way affect the care and treatment you will receive. Are you happy to participate?"
+            "text": "I'd like to ask you questions in order to help us conduct research in hopes to improve healthcare for Lassa fever. Redeemer University, the University of Cambridge, and our partners may have access to this information, including your current location. .  Note that you may withdraw your permission at any time and ask for your data to be erased. Choosing to not participate will in no way affect the care and treatment you will receive. Are you happy to participate?"
           }
         },
         "required": 1,
@@ -89,7 +89,7 @@
         "name": "first_name",
         "display": {
           "prompt": {
-            "text": "3. What is your first name?"
+            "text": "What is your first name?"
           }
         },
         "required": "data('consent') == 'Yes'",
@@ -100,7 +100,7 @@
         "name": "other_name",
         "display": {
           "prompt": {
-            "text": "4. What is your other name?"
+            "text": "What is your other name?"
           },
           "hint": {
             "text": "Skip if none."
@@ -113,7 +113,7 @@
         "name": "surname",
         "display": {
           "prompt": {
-            "text": "5. What is your surname?"
+            "text": "What is your surname?"
           }
         },
         "required": "data('consent') == 'Yes'",
@@ -150,7 +150,7 @@
         "name": "age",
         "display": {
           "prompt": {
-            "text": "6. Age at last birthday (in years)"
+            "text": "Age at last birthday (in years)"
           },
           "constraint_message": {
             "text": "Enter age in years:"
@@ -189,7 +189,7 @@
         "name": "gender",
         "display": {
           "prompt": {
-            "text": "7. Gender"
+            "text": "Gender"
           }
         },
         "required": "data('consent') == 'Yes'",
@@ -201,7 +201,7 @@
         "name": "marital_status",
         "display": {
           "prompt": {
-            "text": "8. Marital status"
+            "text": "Marital status"
           }
         },
         "_row_num": 32
@@ -232,7 +232,7 @@
         "name": "p_lassa",
         "display": {
           "prompt": {
-            "text": "9. Have you ever been diagnosed with Lassa fever at a hospital?"
+            "text": "Have you ever been diagnosed with Lassa fever at a hospital?"
           }
         },
         "required": "data('consent') == 'Yes'",
@@ -244,7 +244,7 @@
         "name": "cohort",
         "display": {
           "prompt": {
-            "text": "10. What cohort does this person belong to?"
+            "text": "What cohort does this person belong to?"
           },
           "hint": {
             "text": "If you are unsure, please ask someone else who might know"
@@ -278,7 +278,7 @@
         "name": "phone_number",
         "display": {
           "prompt": {
-            "text": "1. Phone number"
+            "text": "Phone number"
           }
         },
         "_row_num": 44
@@ -295,7 +295,7 @@
         "name": "registration_date",
         "display": {
           "prompt": {
-            "text": "12. Registration date"
+            "text": "Registration date"
           },
           "hint": {
             "text": "Today's date"
@@ -309,7 +309,7 @@
         "name": "notes",
         "display": {
           "prompt": {
-            "text": "13. Additional notes"
+            "text": "Additional notes"
           }
         },
         "_row_num": 49
@@ -354,7 +354,7 @@
         "type": "note",
         "display": {
           "prompt": {
-            "text": "209. Thank you for your time"
+            "text": "Thank you for your time"
           }
         },
         "_row_num": 57
@@ -364,7 +364,7 @@
         "name": "participant_questions",
         "display": {
           "prompt": {
-            "text": "210. Please, do you have any question for me?"
+            "text": "Please, do you have any question for me?"
           }
         },
         "_row_num": 59
@@ -742,7 +742,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 30,
+        "value": 33,
         "_row_num": 4
       },
       {
@@ -1298,7 +1298,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 30,
+        "value": 33,
         "_row_num": 4
       },
       "survey": {
@@ -2597,7 +2597,7 @@
             "name": "interviewer_name",
             "display": {
               "prompt": {
-                "text": "1. What is the name of the interviewer?"
+                "text": "What is the name of the interviewer?"
               }
             },
             "required": 1,
@@ -2630,7 +2630,7 @@
             "name": "consent",
             "display": {
               "prompt": {
-                "text": "2. I'd like to ask you questions in order to help us conduct research in hopes to improve healthcare for Lassa fever. Redeemer University, the University of Cambridge, and our partners may have access to this information, including your current location. .  Note that you may withdraw your permission at any time and ask for your data to be erased. Choosing to not participate will in no way affect the care and treatment you will receive. Are you happy to participate?"
+                "text": "I'd like to ask you questions in order to help us conduct research in hopes to improve healthcare for Lassa fever. Redeemer University, the University of Cambridge, and our partners may have access to this information, including your current location. .  Note that you may withdraw your permission at any time and ask for your data to be erased. Choosing to not participate will in no way affect the care and treatment you will receive. Are you happy to participate?"
               }
             },
             "required": 1,
@@ -2646,7 +2646,7 @@
             "name": "first_name",
             "display": {
               "prompt": {
-                "text": "3. What is your first name?"
+                "text": "What is your first name?"
               }
             },
             "required": "data('consent') == 'Yes'",
@@ -2662,7 +2662,7 @@
             "name": "other_name",
             "display": {
               "prompt": {
-                "text": "4. What is your other name?"
+                "text": "What is your other name?"
               },
               "hint": {
                 "text": "Skip if none."
@@ -2680,7 +2680,7 @@
             "name": "surname",
             "display": {
               "prompt": {
-                "text": "5. What is your surname?"
+                "text": "What is your surname?"
               }
             },
             "required": "data('consent') == 'Yes'",
@@ -2696,7 +2696,7 @@
             "name": "age",
             "display": {
               "prompt": {
-                "text": "6. Age at last birthday (in years)"
+                "text": "Age at last birthday (in years)"
               },
               "constraint_message": {
                 "text": "Enter age in years:"
@@ -2731,7 +2731,7 @@
             "name": "gender",
             "display": {
               "prompt": {
-                "text": "7. Gender"
+                "text": "Gender"
               }
             },
             "required": "data('consent') == 'Yes'",
@@ -2748,7 +2748,7 @@
             "name": "marital_status",
             "display": {
               "prompt": {
-                "text": "8. Marital status"
+                "text": "Marital status"
               }
             },
             "_row_num": 32,
@@ -2764,7 +2764,7 @@
             "name": "p_lassa",
             "display": {
               "prompt": {
-                "text": "9. Have you ever been diagnosed with Lassa fever at a hospital?"
+                "text": "Have you ever been diagnosed with Lassa fever at a hospital?"
               }
             },
             "required": "data('consent') == 'Yes'",
@@ -2781,7 +2781,7 @@
             "name": "cohort",
             "display": {
               "prompt": {
-                "text": "10. What cohort does this person belong to?"
+                "text": "What cohort does this person belong to?"
               },
               "hint": {
                 "text": "If you are unsure, please ask someone else who might know"
@@ -2800,7 +2800,7 @@
             "name": "phone_number",
             "display": {
               "prompt": {
-                "text": "1. Phone number"
+                "text": "Phone number"
               }
             },
             "_row_num": 44,
@@ -2815,7 +2815,7 @@
             "name": "registration_date",
             "display": {
               "prompt": {
-                "text": "12. Registration date"
+                "text": "Registration date"
               },
               "hint": {
                 "text": "Today's date"
@@ -2834,7 +2834,7 @@
             "name": "notes",
             "display": {
               "prompt": {
-                "text": "13. Additional notes"
+                "text": "Additional notes"
               }
             },
             "_row_num": 49,
@@ -2848,7 +2848,7 @@
             "type": "note",
             "display": {
               "prompt": {
-                "text": "209. Thank you for your time"
+                "text": "Thank you for your time"
               }
             },
             "_row_num": 57,
@@ -2863,7 +2863,7 @@
             "name": "participant_questions",
             "display": {
               "prompt": {
-                "text": "210. Please, do you have any question for me?"
+                "text": "Please, do you have any question for me?"
               }
             },
             "_row_num": 59,

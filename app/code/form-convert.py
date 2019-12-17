@@ -8,8 +8,8 @@ import os
 LOG_COLUMN_NUMBER = 20
 CHARS_PER_LOG = 60000
 
-#List tables we mark as linked to persons - i.e. the forms for these tables will be included in the list of buttons on a person's page
-PERSON_TABLES = ['survey', 'sample', 'rodent', 'gps-mop-up']
+#List tables we mark as not linked to persons - i.e. the forms for these tables will not be included in the list of buttons on a person's page
+NOT_PERSON_TABLES = ['person', 'household']
 
 class Form:
     def __init__(self, filename):
@@ -299,8 +299,11 @@ if __name__ == "__main__":
             print("Converting {}".format(workbook))
             form = Form(workbook)
             form.convert()
-            if form.tableId in PERSON_TABLES:
+            if not form.tableId in NOT_PERSON_TABLES:
+                print("Adding to person page")
                 jsContent.append(form.getJsRepresentation())
+            else:
+                print("Not adding to person page")
             print("Done")
         except Exception as e:
             print("Converting failed due to: {}".format(e))

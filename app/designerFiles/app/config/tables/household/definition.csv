@@ -9,10 +9,11 @@ community_name,community_name,string,[]
 community_name_other,community_name_other,string,[]
 consent,consent,string,[]
 consent_name,consent_name,string,[]
-dump,dump,string,[]
+dump,dump,array,"[""dump_items""]"
 dump1,dump1,mimeUri,"[""dump1_contentType"",""dump1_uriFragment""]"
 dump1_contentType,contentType,mimeType,[]
 dump1_uriFragment,uriFragment,rowpath,[]
+dump_items,items,string,[]
 dump_notes,dump_notes,string,[]
 dump_other,dump_other,string,[]
 extra_question1,extra_question1,string,[]

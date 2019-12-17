@@ -2,8 +2,20 @@
   "xlsx": {
     "survey": [
       {
-        "clause": "begin screen",
+        "type": "assign",
+        "name": "sample_date",
+        "calculation": "odkCommon.toOdkTimeStampFromDate(new Date())",
+        "_row_num": 3
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_date',data('sample_date')]]))",
         "_row_num": 4
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 5
       },
       {
         "values_list": "healthcare_worker_name",
@@ -15,12 +27,12 @@
           }
         },
         "required": 1,
-        "_row_num": 5
+        "_row_num": 6
       },
       {
         "clause": "if",
         "condition": "selected(data('healthcare_worker_name'), 'other_enter_name')",
-        "_row_num": 6
+        "_row_num": 7
       },
       {
         "type": "text",
@@ -30,11 +42,12 @@
             "text": "What is the name of the healthcare worker taking the sample?"
           }
         },
-        "_row_num": 7
+        "required": "selected(data('healthcare_worker_name'), 'other_enter_name')",
+        "_row_num": 8
       },
       {
         "clause": "end if",
-        "_row_num": 8
+        "_row_num": 9
       },
       {
         "values_list": "consent_paper",
@@ -46,38 +59,38 @@
           }
         },
         "required": 1,
-        "_row_num": 9
-      },
-      {
-        "clause": "end screen",
         "_row_num": 10
       },
       {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'consent_paper',data('consent_paper')]]))",
+        "clause": "end screen",
         "_row_num": 11
       },
       {
         "type": "assign",
         "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name_other',data('healthcare_worker_name_other')]]))",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'consent_paper',data('consent_paper')]]))",
         "_row_num": 12
       },
       {
         "type": "assign",
         "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name',data('healthcare_worker_name')]]))",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name_other',data('healthcare_worker_name_other')]]))",
         "_row_num": 13
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name',data('healthcare_worker_name')]]))",
+        "_row_num": 14
       },
       {
         "clause": "if",
         "condition": "data('consent_paper') == 'Yes'",
-        "_row_num": 15
+        "_row_num": 16
       },
       {
         "clause": "begin screen",
-        "_row_num": 20
+        "_row_num": 21
       },
       {
         "values_list": "sample_type",
@@ -88,12 +101,12 @@
             "text": "Sample type"
           }
         },
-        "_row_num": 21
+        "_row_num": 22
       },
       {
         "clause": "if",
         "condition": "selected(data('sample_type'), 'Other')",
-        "_row_num": 22
+        "_row_num": 23
       },
       {
         "type": "text",
@@ -103,20 +116,10 @@
             "text": "Other sample type"
           }
         },
-        "_row_num": 23
-      },
-      {
-        "clause": "end if",
         "_row_num": 24
       },
       {
-        "type": "note",
-        "name": "sample_note",
-        "display": {
-          "prompt": {
-            "text": "Notes about sample"
-          }
-        },
+        "clause": "end if",
         "_row_num": 25
       },
       {
@@ -126,25 +129,39 @@
       {
         "type": "assign",
         "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_note',data('sample_note')]]))",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type_other',data('sample_type_other')]]))",
         "_row_num": 27
       },
       {
         "type": "assign",
         "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type_other',data('sample_type_other')]]))",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type',data('sample_type')]]))",
         "_row_num": 28
+      },
+      {
+        "type": "text",
+        "name": "sample_note",
+        "display": {
+          "prompt": {
+            "text": "Notes about sample"
+          }
+        },
+        "_row_num": 29
       },
       {
         "type": "assign",
         "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type',data('sample_type')]]))",
-        "_row_num": 29
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_note',data('sample_note')]]))",
+        "_row_num": 30
       },
       {
         "clause": "if",
         "condition": "selected(data('sample_type'), 'temperature')",
-        "_row_num": 30
+        "_row_num": 31
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 32
       },
       {
         "values_list": "temp_consent",
@@ -155,22 +172,11 @@
             "text": "May I measure your body temperature? This does not require you to touch anything. If you agree, I will hold a contactless thermometer infront of your forehead."
           }
         },
-        "required": 1,
-        "_row_num": 31
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temp_consent',data('temp_consent')]]))",
-        "_row_num": 32
+        "_row_num": 33
       },
       {
         "clause": "if",
         "condition": "data('temp_consent') == 'Yes'",
-        "_row_num": 33
-      },
-      {
-        "clause": "begin screen",
         "_row_num": 34
       },
       {
@@ -183,7 +189,7 @@
             "text": "Hold thermometer 3-5 cm away front centre of forehead."
           }
         },
-        "_row_num": 35
+        "_row_num": 36
       },
       {
         "type": "decimal",
@@ -193,7 +199,12 @@
             "text": "[Temperature #1]"
           }
         },
-        "_row_num": 36
+        "inputAttributes": {
+          "type": "range",
+          "min": "data('temperature_reading_1') >35",
+          "max": "data('temperature_reading_1') < 43"
+        },
+        "_row_num": 37
       },
       {
         "type": "decimal",
@@ -203,7 +214,12 @@
             "text": "[Temperature #2]"
           }
         },
-        "_row_num": 37
+        "inputAttributes": {
+          "type": "range",
+          "min": "data('temperature_reading_2') > 35",
+          "max": "data('temperature_reading_2') < 43"
+        },
+        "_row_num": 38
       },
       {
         "type": "decimal",
@@ -213,41 +229,74 @@
             "text": "[Temperature #3]"
           }
         },
-        "_row_num": 38
-      },
-      {
-        "clause": "end screen",
+        "inputAttributes": {
+          "type": "range",
+          "min": "data('temperature_reading_3') > 35",
+          "max": "data('temperature_reading_3') < 43"
+        },
         "_row_num": 39
       },
       {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_3',data('temperature_reading_3')]]))",
+        "clause": "end if",
         "_row_num": 40
       },
       {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_2',data('temperature_reading_2')]]))",
+        "clause": "end screen",
         "_row_num": 41
       },
       {
         "type": "assign",
         "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_1',data('temperature_reading_1')]]))",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_3',data('temperature_reading_3')]]))",
         "_row_num": 42
       },
       {
-        "clause": "end if",
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_2',data('temperature_reading_2')]]))",
         "_row_num": 43
       },
       {
-        "clause": "end if",
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_1',data('temperature_reading_1')]]))",
         "_row_num": 44
       },
       {
-        "clause": "begin screen",
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temp_consent',data('temp_consent')]]))",
         "_row_num": 45
+      },
+      {
+        "clause": "end if",
+        "_row_num": 46
+      },
+      {
+        "values_list": "barcode_scanning",
+        "type": "select_one",
+        "name": "barcode_scanning",
+        "display": {
+          "prompt": {
+            "text": "Does a barcode need to be scanned?"
+          }
+        },
+        "_row_num": 48
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'barcode_scanning',data('barcode_scanning')]]))",
+        "_row_num": 49
+      },
+      {
+        "clause": "if",
+        "condition": "data('barcode_scanning') == 'Yes'",
+        "_row_num": 50
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 51
       },
       {
         "type": "barcode",
@@ -255,9 +304,12 @@
         "display": {
           "prompt": {
             "text": "Scan the sample barcode"
+          },
+          "hint": {
+            "text": "Ensure that scanned number matches the number on the label"
           }
         },
-        "_row_num": 46
+        "_row_num": 52
       },
       {
         "type": "text",
@@ -270,7 +322,7 @@
             "text": "If barcode did not scan automatically"
           }
         },
-        "_row_num": 48
+        "_row_num": 54
       },
       {
         "type": "text",
@@ -280,29 +332,29 @@
             "text": "Notes about sample/barcode"
           }
         },
-        "_row_num": 50
+        "_row_num": 56
       },
       {
         "clause": "end screen",
-        "_row_num": 51
+        "_row_num": 57
       },
       {
         "type": "assign",
         "name": "log",
         "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_1_notes',data('sample_id_1_notes')]]))",
-        "_row_num": 52
+        "_row_num": 58
       },
       {
         "type": "assign",
         "name": "log",
         "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_1',data('sample_id_manual_1')]]))",
-        "_row_num": 53
+        "_row_num": 59
       },
       {
         "type": "assign",
         "name": "log",
         "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_1',data('sample_id_1')]]))",
-        "_row_num": 54
+        "_row_num": 60
       },
       {
         "values_list": "scan_another_2",
@@ -313,22 +365,22 @@
             "text": "Do you need to scan or enter different barcode(s)?"
           }
         },
-        "_row_num": 57
+        "_row_num": 61
       },
       {
         "type": "assign",
         "name": "log",
         "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_2',data('scan_another_2')]]))",
-        "_row_num": 58
+        "_row_num": 62
       },
       {
         "clause": "if",
         "condition": "data('scan_another_2') == 'Yes'",
-        "_row_num": 59
+        "_row_num": 64
       },
       {
         "clause": "begin screen",
-        "_row_num": 60
+        "_row_num": 65
       },
       {
         "type": "barcode",
@@ -336,9 +388,12 @@
         "display": {
           "prompt": {
             "text": "Scan the sample barcode"
+          },
+          "hint": {
+            "text": "Ensure that scanned number matches the number on the label"
           }
         },
-        "_row_num": 62
+        "_row_num": 66
       },
       {
         "type": "text",
@@ -351,7 +406,7 @@
             "text": "If barcode did not scan automatically"
           }
         },
-        "_row_num": 64
+        "_row_num": 68
       },
       {
         "type": "text",
@@ -361,7 +416,29 @@
             "text": "Notes about sample/barcode"
           }
         },
-        "_row_num": 66
+        "_row_num": 70
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 71
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2_notes',data('sample_id_2_notes')]]))",
+        "_row_num": 72
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_2',data('sample_id_manual_2')]]))",
+        "_row_num": 73
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2',data('sample_id_2')]]))",
+        "_row_num": 74
       },
       {
         "values_list": "scan_another_3",
@@ -372,44 +449,22 @@
             "text": "Do you need to scan or enter different barcode(s)?"
           }
         },
-        "_row_num": 68
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 69
+        "_row_num": 75
       },
       {
         "type": "assign",
         "name": "log",
         "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_3',data('scan_another_3')]]))",
-        "_row_num": 70
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2_notes',data('sample_id_2_notes')]]))",
-        "_row_num": 71
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_2',data('sample_id_manual_2')]]))",
-        "_row_num": 72
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2',data('sample_id_2')]]))",
-        "_row_num": 73
+        "_row_num": 76
       },
       {
         "clause": "if",
         "condition": "data('scan_another_3') == 'Yes'",
-        "_row_num": 74
+        "_row_num": 78
       },
       {
         "clause": "begin screen",
-        "_row_num": 76
+        "_row_num": 79
       },
       {
         "type": "barcode",
@@ -417,9 +472,12 @@
         "display": {
           "prompt": {
             "text": "Scan the sample barcode"
+          },
+          "hint": {
+            "text": "Ensure that scanned number matches the number on the label"
           }
         },
-        "_row_num": 77
+        "_row_num": 80
       },
       {
         "type": "text",
@@ -432,7 +490,7 @@
             "text": "If barcode did not scan automatically"
           }
         },
-        "_row_num": 79
+        "_row_num": 82
       },
       {
         "type": "text",
@@ -442,7 +500,29 @@
             "text": "Notes about sample/barcode"
           }
         },
-        "_row_num": 81
+        "_row_num": 84
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 85
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_3_notes',data('sample_id_3_notes')]]))",
+        "_row_num": 86
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_3',data('sample_id_manual_3')]]))",
+        "_row_num": 87
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_3',data('sample_id_3')]]))",
+        "_row_num": 88
       },
       {
         "values_list": "scan_another_4",
@@ -453,44 +533,22 @@
             "text": "Do you need to scan or enter different barcode(s)?"
           }
         },
-        "_row_num": 83
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 85
+        "_row_num": 89
       },
       {
         "type": "assign",
         "name": "log",
         "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_4',data('scan_another_4')]]))",
-        "_row_num": 86
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_3_notes',data('sample_id_3_notes')]]))",
-        "_row_num": 87
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_3',data('sample_id_manual_3')]]))",
-        "_row_num": 88
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_3',data('sample_id_3')]]))",
-        "_row_num": 89
+        "_row_num": 90
       },
       {
         "clause": "if",
         "condition": "data('scan_another_4') == 'Yes'",
-        "_row_num": 90
+        "_row_num": 92
       },
       {
         "clause": "begin screen",
-        "_row_num": 91
+        "_row_num": 93
       },
       {
         "type": "barcode",
@@ -498,9 +556,12 @@
         "display": {
           "prompt": {
             "text": "Scan the sample barcode"
+          },
+          "hint": {
+            "text": "Ensure that scanned number matches the number on the label"
           }
         },
-        "_row_num": 92
+        "_row_num": 94
       },
       {
         "type": "text",
@@ -513,7 +574,7 @@
             "text": "If barcode did not scan automatically"
           }
         },
-        "_row_num": 94
+        "_row_num": 96
       },
       {
         "type": "text",
@@ -523,36 +584,28 @@
             "text": "Notes about sample/barcode"
           }
         },
-        "_row_num": 96
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 97
-      },
-      {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4_notes',data('sample_id_4_notes')]]))",
         "_row_num": 98
       },
       {
-        "type": "assign",
-        "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_4',data('sample_id_manual_4')]]))",
+        "clause": "end screen",
         "_row_num": 99
       },
       {
         "type": "assign",
         "name": "log",
-        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4',data('sample_id_4')]]))",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4_notes',data('sample_id_4_notes')]]))",
         "_row_num": 100
       },
       {
-        "clause": "end if",
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_4',data('sample_id_manual_4')]]))",
         "_row_num": 101
       },
       {
-        "clause": "end if",
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4',data('sample_id_4')]]))",
         "_row_num": 102
       },
       {
@@ -564,124 +617,398 @@
         "_row_num": 104
       },
       {
+        "clause": "end if",
+        "_row_num": 105
+      },
+      {
+        "clause": "end if",
+        "_row_num": 106
+      },
+      {
+        "clause": "end if",
+        "_row_num": 107
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 108
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "Thank you for your time"
+          }
+        },
+        "_row_num": 109
+      },
+      {
+        "type": "text",
+        "name": "participant_questions",
+        "display": {
+          "prompt": {
+            "text": "Please, do you have any question for me?"
+          }
+        },
+        "_row_num": 111
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 112
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'participant_questions',data('participant_questions')]]))",
+        "_row_num": 113
+      },
+      {
+        "clause": "if",
+        "condition": 0,
+        "_row_num": 115
+      },
+      {
+        "type": "string",
+        "name": "extra_question1",
+        "_row_num": 116
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question1',data('extra_question1')]]))",
+        "_row_num": 117
+      },
+      {
+        "type": "string",
+        "name": "extra_question2",
+        "_row_num": 118
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question2',data('extra_question2')]]))",
+        "_row_num": 119
+      },
+      {
+        "type": "string",
+        "name": "extra_question3",
+        "_row_num": 120
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question3',data('extra_question3')]]))",
+        "_row_num": 121
+      },
+      {
+        "type": "string",
+        "name": "extra_question4",
+        "_row_num": 122
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question4',data('extra_question4')]]))",
+        "_row_num": 123
+      },
+      {
+        "type": "string",
+        "name": "extra_question5",
+        "_row_num": 124
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question5',data('extra_question5')]]))",
+        "_row_num": 125
+      },
+      {
+        "type": "string",
+        "name": "extra_question6",
+        "_row_num": 126
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question6',data('extra_question6')]]))",
+        "_row_num": 127
+      },
+      {
+        "type": "string",
+        "name": "extra_question7",
+        "_row_num": 128
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question7',data('extra_question7')]]))",
+        "_row_num": 129
+      },
+      {
+        "type": "string",
+        "name": "extra_question8",
+        "_row_num": 130
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question8',data('extra_question8')]]))",
+        "_row_num": 131
+      },
+      {
+        "type": "string",
+        "name": "extra_question9",
+        "_row_num": 132
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question9',data('extra_question9')]]))",
+        "_row_num": 133
+      },
+      {
+        "type": "string",
+        "name": "extra_question10",
+        "_row_num": 134
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question10',data('extra_question10')]]))",
+        "_row_num": 135
+      },
+      {
+        "type": "string",
+        "name": "extra_question11",
+        "_row_num": 136
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question11',data('extra_question11')]]))",
+        "_row_num": 137
+      },
+      {
+        "type": "string",
+        "name": "extra_question12",
+        "_row_num": 138
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question12',data('extra_question12')]]))",
+        "_row_num": 139
+      },
+      {
+        "type": "string",
+        "name": "extra_question13",
+        "_row_num": 140
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question13',data('extra_question13')]]))",
+        "_row_num": 141
+      },
+      {
+        "type": "string",
+        "name": "extra_question14",
+        "_row_num": 142
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question14',data('extra_question14')]]))",
+        "_row_num": 143
+      },
+      {
+        "type": "string",
+        "name": "extra_question15",
+        "_row_num": 144
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question15',data('extra_question15')]]))",
+        "_row_num": 145
+      },
+      {
+        "type": "string",
+        "name": "extra_question16",
+        "_row_num": 146
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question16',data('extra_question16')]]))",
+        "_row_num": 147
+      },
+      {
+        "type": "string",
+        "name": "extra_question17",
+        "_row_num": 148
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question17',data('extra_question17')]]))",
+        "_row_num": 149
+      },
+      {
+        "type": "string",
+        "name": "extra_question18",
+        "_row_num": 150
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question18',data('extra_question18')]]))",
+        "_row_num": 151
+      },
+      {
+        "type": "string",
+        "name": "extra_question19",
+        "_row_num": 152
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question19',data('extra_question19')]]))",
+        "_row_num": 153
+      },
+      {
+        "type": "string",
+        "name": "extra_question20",
+        "_row_num": 154
+      },
+      {
+        "type": "assign",
+        "name": "log",
+        "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question20',data('extra_question20')]]))",
+        "_row_num": 155
+      },
+      {
+        "clause": "end if",
+        "_row_num": 156
+      },
+      {
         "type": "assign",
         "name": "log_0",
         "calculation": "data('log').substring(0,60000) == '' ? ' ' : data('log').substring(0,60000)",
-        "_row_num": 105
+        "_row_num": 157
       },
       {
         "type": "assign",
         "name": "log_1",
         "calculation": "data('log').substring(60000,120000) == '' ? ' ' : data('log').substring(60000,120000)",
-        "_row_num": 106
+        "_row_num": 158
       },
       {
         "type": "assign",
         "name": "log_2",
         "calculation": "data('log').substring(120000,180000) == '' ? ' ' : data('log').substring(120000,180000)",
-        "_row_num": 107
+        "_row_num": 159
       },
       {
         "type": "assign",
         "name": "log_3",
         "calculation": "data('log').substring(180000,240000) == '' ? ' ' : data('log').substring(180000,240000)",
-        "_row_num": 108
+        "_row_num": 160
       },
       {
         "type": "assign",
         "name": "log_4",
         "calculation": "data('log').substring(240000,300000) == '' ? ' ' : data('log').substring(240000,300000)",
-        "_row_num": 109
+        "_row_num": 161
       },
       {
         "type": "assign",
         "name": "log_5",
         "calculation": "data('log').substring(300000,360000) == '' ? ' ' : data('log').substring(300000,360000)",
-        "_row_num": 110
+        "_row_num": 162
       },
       {
         "type": "assign",
         "name": "log_6",
         "calculation": "data('log').substring(360000,420000) == '' ? ' ' : data('log').substring(360000,420000)",
-        "_row_num": 111
+        "_row_num": 163
       },
       {
         "type": "assign",
         "name": "log_7",
         "calculation": "data('log').substring(420000,480000) == '' ? ' ' : data('log').substring(420000,480000)",
-        "_row_num": 112
+        "_row_num": 164
       },
       {
         "type": "assign",
         "name": "log_8",
         "calculation": "data('log').substring(480000,540000) == '' ? ' ' : data('log').substring(480000,540000)",
-        "_row_num": 113
+        "_row_num": 165
       },
       {
         "type": "assign",
         "name": "log_9",
         "calculation": "data('log').substring(540000,600000) == '' ? ' ' : data('log').substring(540000,600000)",
-        "_row_num": 114
+        "_row_num": 166
       },
       {
         "type": "assign",
         "name": "log_10",
         "calculation": "data('log').substring(600000,660000) == '' ? ' ' : data('log').substring(600000,660000)",
-        "_row_num": 115
+        "_row_num": 167
       },
       {
         "type": "assign",
         "name": "log_11",
         "calculation": "data('log').substring(660000,720000) == '' ? ' ' : data('log').substring(660000,720000)",
-        "_row_num": 116
+        "_row_num": 168
       },
       {
         "type": "assign",
         "name": "log_12",
         "calculation": "data('log').substring(720000,780000) == '' ? ' ' : data('log').substring(720000,780000)",
-        "_row_num": 117
+        "_row_num": 169
       },
       {
         "type": "assign",
         "name": "log_13",
         "calculation": "data('log').substring(780000,840000) == '' ? ' ' : data('log').substring(780000,840000)",
-        "_row_num": 118
+        "_row_num": 170
       },
       {
         "type": "assign",
         "name": "log_14",
         "calculation": "data('log').substring(840000,900000) == '' ? ' ' : data('log').substring(840000,900000)",
-        "_row_num": 119
+        "_row_num": 171
       },
       {
         "type": "assign",
         "name": "log_15",
         "calculation": "data('log').substring(900000,960000) == '' ? ' ' : data('log').substring(900000,960000)",
-        "_row_num": 120
+        "_row_num": 172
       },
       {
         "type": "assign",
         "name": "log_16",
         "calculation": "data('log').substring(960000,1020000) == '' ? ' ' : data('log').substring(960000,1020000)",
-        "_row_num": 121
+        "_row_num": 173
       },
       {
         "type": "assign",
         "name": "log_17",
         "calculation": "data('log').substring(1020000,1080000) == '' ? ' ' : data('log').substring(1020000,1080000)",
-        "_row_num": 122
+        "_row_num": 174
       },
       {
         "type": "assign",
         "name": "log_18",
         "calculation": "data('log').substring(1080000,1140000) == '' ? ' ' : data('log').substring(1080000,1140000)",
-        "_row_num": 123
+        "_row_num": 175
       },
       {
         "type": "assign",
         "name": "log_19",
         "calculation": "data('log').substring(1140000,1200000) == '' ? ' ' : data('log').substring(1140000,1200000)",
-        "_row_num": 124
+        "_row_num": 176
       }
     ],
     "model": [
@@ -830,7 +1157,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 30,
+        "value": 33,
         "_row_num": 4
       },
       {
@@ -1155,7 +1482,7 @@
             "text": "Yes"
           }
         },
-        "_row_num": 38
+        "_row_num": 39
       },
       {
         "choice_list_name": "scan_another_2",
@@ -1165,7 +1492,7 @@
             "text": "No"
           }
         },
-        "_row_num": 39
+        "_row_num": 40
       },
       {
         "choice_list_name": "scan_another_3",
@@ -1173,21 +1500,21 @@
         "display": {
           "title": {
             "text": "Yes"
-          }
-        },
-        "_row_num": 41
-      },
-      {
-        "choice_list_name": "scan_another_3",
-        "data_value": "No",
-        "display": {
-          "title": {
-            "text": "No"
           }
         },
         "_row_num": 42
       },
       {
+        "choice_list_name": "scan_another_3",
+        "data_value": "No",
+        "display": {
+          "title": {
+            "text": "No"
+          }
+        },
+        "_row_num": 43
+      },
+      {
         "choice_list_name": "scan_another_4",
         "data_value": "Yes",
         "display": {
@@ -1195,7 +1522,7 @@
             "text": "Yes"
           }
         },
-        "_row_num": 44
+        "_row_num": 45
       },
       {
         "choice_list_name": "scan_another_4",
@@ -1205,7 +1532,27 @@
             "text": "No"
           }
         },
-        "_row_num": 45
+        "_row_num": 46
+      },
+      {
+        "choice_list_name": "barcode_scanning",
+        "data_value": "Yes",
+        "display": {
+          "title": {
+            "text": "Yes"
+          }
+        },
+        "_row_num": 48
+      },
+      {
+        "choice_list_name": "barcode_scanning",
+        "data_value": "No",
+        "display": {
+          "title": {
+            "text": "No"
+          }
+        },
+        "_row_num": 49
       }
     ]
   },
@@ -1238,7 +1585,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 30,
+        "value": 33,
         "_row_num": 4
       },
       "survey": {
@@ -1603,7 +1950,7 @@
               "text": "Yes"
             }
           },
-          "_row_num": 38
+          "_row_num": 39
         },
         {
           "choice_list_name": "scan_another_2",
@@ -1613,7 +1960,7 @@
               "text": "No"
             }
           },
-          "_row_num": 39
+          "_row_num": 40
         }
       ],
       "scan_another_3": [
@@ -1625,7 +1972,7 @@
               "text": "Yes"
             }
           },
-          "_row_num": 41
+          "_row_num": 42
         },
         {
           "choice_list_name": "scan_another_3",
@@ -1635,7 +1982,7 @@
               "text": "No"
             }
           },
-          "_row_num": 42
+          "_row_num": 43
         }
       ],
       "scan_another_4": [
@@ -1647,7 +1994,7 @@
               "text": "Yes"
             }
           },
-          "_row_num": 44
+          "_row_num": 45
         },
         {
           "choice_list_name": "scan_another_4",
@@ -1657,7 +2004,29 @@
               "text": "No"
             }
           },
-          "_row_num": 45
+          "_row_num": 46
+        }
+      ],
+      "barcode_scanning": [
+        {
+          "choice_list_name": "barcode_scanning",
+          "data_value": "Yes",
+          "display": {
+            "title": {
+              "text": "Yes"
+            }
+          },
+          "_row_num": 48
+        },
+        {
+          "choice_list_name": "barcode_scanning",
+          "data_value": "No",
+          "display": {
+            "title": {
+              "text": "No"
+            }
+          },
+          "_row_num": 49
         }
       ]
     },
@@ -1681,7 +2050,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
@@ -1693,6 +2062,10 @@
             "section_name": "survey"
           },
           {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 27,
             "section_name": "survey"
           },
@@ -1701,19 +2074,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 29,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 32,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 40,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 41,
+            "_row_num": 30,
             "section_name": "survey"
           },
           {
@@ -1721,15 +2082,19 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 52,
+            "_row_num": 43,
             "section_name": "survey"
           },
           {
-            "_row_num": 53,
+            "_row_num": 44,
             "section_name": "survey"
           },
           {
-            "_row_num": 54,
+            "_row_num": 45,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 49,
             "section_name": "survey"
           },
           {
@@ -1737,11 +2102,15 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 70,
+            "_row_num": 59,
             "section_name": "survey"
           },
           {
-            "_row_num": 71,
+            "_row_num": 60,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 62,
             "section_name": "survey"
           },
           {
@@ -1750,6 +2119,14 @@
           },
           {
             "_row_num": 73,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 74,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 76,
             "section_name": "survey"
           },
           {
@@ -1765,19 +2142,103 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 89,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 98,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 99,
+            "_row_num": 90,
             "section_name": "survey"
           },
           {
             "_row_num": 100,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 101,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 102,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 113,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 117,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 119,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 121,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 123,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 125,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 127,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 129,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 131,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 133,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 135,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 137,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 139,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 141,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 143,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 145,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 147,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 149,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 151,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 153,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 155,
             "section_name": "survey"
           },
           {
@@ -1792,7 +2253,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 105,
+            "_row_num": 157,
             "section_name": "survey"
           },
           {
@@ -1807,7 +2268,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 106,
+            "_row_num": 158,
             "section_name": "survey"
           },
           {
@@ -1822,7 +2283,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 107,
+            "_row_num": 159,
             "section_name": "survey"
           },
           {
@@ -1837,7 +2298,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 108,
+            "_row_num": 160,
             "section_name": "survey"
           },
           {
@@ -1852,7 +2313,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 109,
+            "_row_num": 161,
             "section_name": "survey"
           },
           {
@@ -1867,7 +2328,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 110,
+            "_row_num": 162,
             "section_name": "survey"
           },
           {
@@ -1882,7 +2343,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 111,
+            "_row_num": 163,
             "section_name": "survey"
           },
           {
@@ -1897,7 +2358,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 112,
+            "_row_num": 164,
             "section_name": "survey"
           },
           {
@@ -1912,7 +2373,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 113,
+            "_row_num": 165,
             "section_name": "survey"
           },
           {
@@ -1927,7 +2388,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 114,
+            "_row_num": 166,
             "section_name": "survey"
           },
           {
@@ -1942,7 +2403,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 115,
+            "_row_num": 167,
             "section_name": "survey"
           },
           {
@@ -1957,7 +2418,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 116,
+            "_row_num": 168,
             "section_name": "survey"
           },
           {
@@ -1972,7 +2433,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 117,
+            "_row_num": 169,
             "section_name": "survey"
           },
           {
@@ -1987,7 +2448,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 118,
+            "_row_num": 170,
             "section_name": "survey"
           },
           {
@@ -2002,7 +2463,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 119,
+            "_row_num": 171,
             "section_name": "survey"
           },
           {
@@ -2017,7 +2478,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 120,
+            "_row_num": 172,
             "section_name": "survey"
           },
           {
@@ -2032,7 +2493,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 121,
+            "_row_num": 173,
             "section_name": "survey"
           },
           {
@@ -2047,7 +2508,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 122,
+            "_row_num": 174,
             "section_name": "survey"
           },
           {
@@ -2062,7 +2523,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 123,
+            "_row_num": 175,
             "section_name": "survey"
           },
           {
@@ -2077,7 +2538,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 124,
+            "_row_num": 176,
             "section_name": "survey"
           },
           {
@@ -2091,7 +2552,7 @@
       "healthcare_worker_name": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -2102,7 +2563,7 @@
       "healthcare_worker_name_other": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -2112,7 +2573,7 @@
       "consent_paper": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -2123,7 +2584,7 @@
       "sample_type": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -2138,17 +2599,27 @@
       "sample_type_other": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "elementKey": "sample_type_other"
       },
+      "sample_note": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "sample_note"
+      },
       "temp_consent": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -2159,7 +2630,7 @@
       "temperature_reading_1": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -2169,7 +2640,7 @@
       "temperature_reading_2": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -2179,17 +2650,28 @@
       "temperature_reading_3": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
         "type": "number",
         "elementKey": "temperature_reading_3"
       },
+      "barcode_scanning": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "barcode_scanning",
+        "elementKey": "barcode_scanning"
+      },
       "sample_id_1": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -2199,7 +2681,7 @@
       "sample_id_manual_1": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -2209,7 +2691,7 @@
       "sample_id_1_notes": {
         "_defn": [
           {
-            "_row_num": 50,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -2219,7 +2701,7 @@
       "scan_another_2": {
         "_defn": [
           {
-            "_row_num": 57,
+            "_row_num": 61,
             "section_name": "survey"
           }
         ],
@@ -2230,7 +2712,7 @@
       "sample_id_2": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 66,
             "section_name": "survey"
           }
         ],
@@ -2240,7 +2722,7 @@
       "sample_id_manual_2": {
         "_defn": [
           {
-            "_row_num": 64,
+            "_row_num": 68,
             "section_name": "survey"
           }
         ],
@@ -2250,7 +2732,7 @@
       "sample_id_2_notes": {
         "_defn": [
           {
-            "_row_num": 66,
+            "_row_num": 70,
             "section_name": "survey"
           }
         ],
@@ -2260,7 +2742,7 @@
       "scan_another_3": {
         "_defn": [
           {
-            "_row_num": 68,
+            "_row_num": 75,
             "section_name": "survey"
           }
         ],
@@ -2271,7 +2753,7 @@
       "sample_id_3": {
         "_defn": [
           {
-            "_row_num": 77,
+            "_row_num": 80,
             "section_name": "survey"
           }
         ],
@@ -2281,7 +2763,7 @@
       "sample_id_manual_3": {
         "_defn": [
           {
-            "_row_num": 79,
+            "_row_num": 82,
             "section_name": "survey"
           }
         ],
@@ -2291,7 +2773,7 @@
       "sample_id_3_notes": {
         "_defn": [
           {
-            "_row_num": 81,
+            "_row_num": 84,
             "section_name": "survey"
           }
         ],
@@ -2301,7 +2783,7 @@
       "scan_another_4": {
         "_defn": [
           {
-            "_row_num": 83,
+            "_row_num": 89,
             "section_name": "survey"
           }
         ],
@@ -2312,7 +2794,7 @@
       "sample_id_4": {
         "_defn": [
           {
-            "_row_num": 92,
+            "_row_num": 94,
             "section_name": "survey"
           }
         ],
@@ -2322,7 +2804,7 @@
       "sample_id_manual_4": {
         "_defn": [
           {
-            "_row_num": 94,
+            "_row_num": 96,
             "section_name": "survey"
           }
         ],
@@ -2332,12 +2814,231 @@
       "sample_id_4_notes": {
         "_defn": [
           {
-            "_row_num": 96,
+            "_row_num": 98,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "elementKey": "sample_id_4_notes"
+      },
+      "participant_questions": {
+        "_defn": [
+          {
+            "_row_num": 111,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "participant_questions"
+      },
+      "extra_question1": {
+        "_defn": [
+          {
+            "_row_num": 116,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question1"
+      },
+      "extra_question2": {
+        "_defn": [
+          {
+            "_row_num": 118,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question2"
+      },
+      "extra_question3": {
+        "_defn": [
+          {
+            "_row_num": 120,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question3"
+      },
+      "extra_question4": {
+        "_defn": [
+          {
+            "_row_num": 122,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question4"
+      },
+      "extra_question5": {
+        "_defn": [
+          {
+            "_row_num": 124,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question5"
+      },
+      "extra_question6": {
+        "_defn": [
+          {
+            "_row_num": 126,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question6"
+      },
+      "extra_question7": {
+        "_defn": [
+          {
+            "_row_num": 128,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question7"
+      },
+      "extra_question8": {
+        "_defn": [
+          {
+            "_row_num": 130,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question8"
+      },
+      "extra_question9": {
+        "_defn": [
+          {
+            "_row_num": 132,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question9"
+      },
+      "extra_question10": {
+        "_defn": [
+          {
+            "_row_num": 134,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question10"
+      },
+      "extra_question11": {
+        "_defn": [
+          {
+            "_row_num": 136,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question11"
+      },
+      "extra_question12": {
+        "_defn": [
+          {
+            "_row_num": 138,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question12"
+      },
+      "extra_question13": {
+        "_defn": [
+          {
+            "_row_num": 140,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question13"
+      },
+      "extra_question14": {
+        "_defn": [
+          {
+            "_row_num": 142,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question14"
+      },
+      "extra_question15": {
+        "_defn": [
+          {
+            "_row_num": 144,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question15"
+      },
+      "extra_question16": {
+        "_defn": [
+          {
+            "_row_num": 146,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question16"
+      },
+      "extra_question17": {
+        "_defn": [
+          {
+            "_row_num": 148,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question17"
+      },
+      "extra_question18": {
+        "_defn": [
+          {
+            "_row_num": 150,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question18"
+      },
+      "extra_question19": {
+        "_defn": [
+          {
+            "_row_num": 152,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question19"
+      },
+      "extra_question20": {
+        "_defn": [
+          {
+            "_row_num": 154,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question20"
+      },
+      "sample_date": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "sample_date"
       }
     },
     "section_names": [
@@ -2360,11 +3061,11 @@
               }
             },
             "required": 1,
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen4",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 0
           },
           {
@@ -2375,11 +3076,12 @@
                 "text": "What is the name of the healthcare worker taking the sample?"
               }
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "required": "selected(data('healthcare_worker_name'), 'other_enter_name')",
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen4",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 1
           },
           {
@@ -2392,11 +3094,11 @@
               }
             },
             "required": 1,
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen4",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 2
           },
           {
@@ -2408,11 +3110,11 @@
                 "text": "Sample type"
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 3
           },
           {
@@ -2423,26 +3125,26 @@
                 "text": "Other sample type"
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 4
           },
           {
-            "type": "note",
+            "type": "text",
             "name": "sample_note",
             "display": {
               "prompt": {
                 "text": "Notes about sample"
               }
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen29",
             "promptIdx": 5
           },
           {
@@ -2454,12 +3156,11 @@
                 "text": "May I measure your body temperature? This does not require you to touch anything. If you agree, I will hold a contactless thermometer infront of your forehead."
               }
             },
-            "required": 1,
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen32",
             "promptIdx": 6
           },
           {
@@ -2472,11 +3173,11 @@
                 "text": "Hold thermometer 3-5 cm away front centre of forehead."
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen34",
+            "_branch_label_enclosing_screen": "survey/_screen32",
             "promptIdx": 7
           },
           {
@@ -2487,11 +3188,16 @@
                 "text": "[Temperature #1]"
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "inputAttributes": {
+              "type": "range",
+              "min": "data('temperature_reading_1') >35",
+              "max": "data('temperature_reading_1') < 43"
+            },
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen34",
+            "_branch_label_enclosing_screen": "survey/_screen32",
             "promptIdx": 8
           },
           {
@@ -2502,11 +3208,16 @@
                 "text": "[Temperature #2]"
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "inputAttributes": {
+              "type": "range",
+              "min": "data('temperature_reading_2') > 35",
+              "max": "data('temperature_reading_2') < 43"
+            },
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen34",
+            "_branch_label_enclosing_screen": "survey/_screen32",
             "promptIdx": 9
           },
           {
@@ -2517,12 +3228,33 @@
                 "text": "[Temperature #3]"
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "inputAttributes": {
+              "type": "range",
+              "min": "data('temperature_reading_3') > 35",
+              "max": "data('temperature_reading_3') < 43"
+            },
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen34",
+            "_branch_label_enclosing_screen": "survey/_screen32",
             "promptIdx": 10
+          },
+          {
+            "values_list": "barcode_scanning",
+            "type": "select_one",
+            "name": "barcode_scanning",
+            "display": {
+              "prompt": {
+                "text": "Does a barcode need to be scanned?"
+              }
+            },
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 11
           },
           {
             "type": "barcode",
@@ -2530,14 +3262,17 @@
             "display": {
               "prompt": {
                 "text": "Scan the sample barcode"
+              },
+              "hint": {
+                "text": "Ensure that scanned number matches the number on the label"
               }
             },
-            "_row_num": 46,
-            "__rowNum__": 45,
+            "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen45",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 12
           },
           {
             "type": "text",
@@ -2550,12 +3285,12 @@
                 "text": "If barcode did not scan automatically"
               }
             },
-            "_row_num": 48,
-            "__rowNum__": 47,
+            "_row_num": 54,
+            "__rowNum__": 53,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen45",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 13
           },
           {
             "type": "text",
@@ -2565,12 +3300,12 @@
                 "text": "Notes about sample/barcode"
               }
             },
-            "_row_num": 50,
-            "__rowNum__": 49,
+            "_row_num": 56,
+            "__rowNum__": 55,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen45",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 14
           },
           {
             "values_list": "scan_another_2",
@@ -2581,12 +3316,12 @@
                 "text": "Do you need to scan or enter different barcode(s)?"
               }
             },
-            "_row_num": 57,
-            "__rowNum__": 56,
+            "_row_num": 61,
+            "__rowNum__": 60,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen57",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen61",
+            "promptIdx": 15
           },
           {
             "type": "barcode",
@@ -2594,14 +3329,17 @@
             "display": {
               "prompt": {
                 "text": "Scan the sample barcode"
+              },
+              "hint": {
+                "text": "Ensure that scanned number matches the number on the label"
               }
             },
-            "_row_num": 62,
-            "__rowNum__": 61,
+            "_row_num": 66,
+            "__rowNum__": 65,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen60",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen65",
+            "promptIdx": 16
           },
           {
             "type": "text",
@@ -2614,12 +3352,12 @@
                 "text": "If barcode did not scan automatically"
               }
             },
-            "_row_num": 64,
-            "__rowNum__": 63,
+            "_row_num": 68,
+            "__rowNum__": 67,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen60",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen65",
+            "promptIdx": 17
           },
           {
             "type": "text",
@@ -2629,12 +3367,12 @@
                 "text": "Notes about sample/barcode"
               }
             },
-            "_row_num": 66,
-            "__rowNum__": 65,
+            "_row_num": 70,
+            "__rowNum__": 69,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen60",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen65",
+            "promptIdx": 18
           },
           {
             "values_list": "scan_another_3",
@@ -2645,12 +3383,12 @@
                 "text": "Do you need to scan or enter different barcode(s)?"
               }
             },
-            "_row_num": 68,
-            "__rowNum__": 67,
+            "_row_num": 75,
+            "__rowNum__": 74,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen60",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen75",
+            "promptIdx": 19
           },
           {
             "type": "barcode",
@@ -2658,14 +3396,17 @@
             "display": {
               "prompt": {
                 "text": "Scan the sample barcode"
+              },
+              "hint": {
+                "text": "Ensure that scanned number matches the number on the label"
               }
             },
-            "_row_num": 77,
-            "__rowNum__": 76,
+            "_row_num": 80,
+            "__rowNum__": 79,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen76",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen79",
+            "promptIdx": 20
           },
           {
             "type": "text",
@@ -2678,12 +3419,12 @@
                 "text": "If barcode did not scan automatically"
               }
             },
-            "_row_num": 79,
-            "__rowNum__": 78,
+            "_row_num": 82,
+            "__rowNum__": 81,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen76",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen79",
+            "promptIdx": 21
           },
           {
             "type": "text",
@@ -2693,12 +3434,12 @@
                 "text": "Notes about sample/barcode"
               }
             },
-            "_row_num": 81,
-            "__rowNum__": 80,
+            "_row_num": 84,
+            "__rowNum__": 83,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen76",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen79",
+            "promptIdx": 22
           },
           {
             "values_list": "scan_another_4",
@@ -2709,12 +3450,12 @@
                 "text": "Do you need to scan or enter different barcode(s)?"
               }
             },
-            "_row_num": 83,
-            "__rowNum__": 82,
+            "_row_num": 89,
+            "__rowNum__": 88,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen76",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen89",
+            "promptIdx": 23
           },
           {
             "type": "barcode",
@@ -2722,14 +3463,17 @@
             "display": {
               "prompt": {
                 "text": "Scan the sample barcode"
+              },
+              "hint": {
+                "text": "Ensure that scanned number matches the number on the label"
               }
             },
-            "_row_num": 92,
-            "__rowNum__": 91,
+            "_row_num": 94,
+            "__rowNum__": 93,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen91",
-            "promptIdx": 23
+            "_branch_label_enclosing_screen": "survey/_screen93",
+            "promptIdx": 24
           },
           {
             "type": "text",
@@ -2742,12 +3486,12 @@
                 "text": "If barcode did not scan automatically"
               }
             },
-            "_row_num": 94,
-            "__rowNum__": 93,
+            "_row_num": 96,
+            "__rowNum__": 95,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen91",
-            "promptIdx": 24
+            "_branch_label_enclosing_screen": "survey/_screen93",
+            "promptIdx": 25
           },
           {
             "type": "text",
@@ -2757,91 +3501,338 @@
                 "text": "Notes about sample/barcode"
               }
             },
-            "_row_num": 96,
-            "__rowNum__": 95,
+            "_row_num": 98,
+            "__rowNum__": 97,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen91",
-            "promptIdx": 25
+            "_branch_label_enclosing_screen": "survey/_screen93",
+            "promptIdx": 26
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "Thank you for your time"
+              }
+            },
+            "_row_num": 109,
+            "__rowNum__": 108,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen108",
+            "promptIdx": 27
+          },
+          {
+            "type": "text",
+            "name": "participant_questions",
+            "display": {
+              "prompt": {
+                "text": "Please, do you have any question for me?"
+              }
+            },
+            "_row_num": 111,
+            "__rowNum__": 110,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen108",
+            "promptIdx": 28
+          },
+          {
+            "type": "string",
+            "name": "extra_question1",
+            "_row_num": 116,
+            "__rowNum__": 115,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen116",
+            "promptIdx": 29
+          },
+          {
+            "type": "string",
+            "name": "extra_question2",
+            "_row_num": 118,
+            "__rowNum__": 117,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen118",
+            "promptIdx": 30
+          },
+          {
+            "type": "string",
+            "name": "extra_question3",
+            "_row_num": 120,
+            "__rowNum__": 119,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen120",
+            "promptIdx": 31
+          },
+          {
+            "type": "string",
+            "name": "extra_question4",
+            "_row_num": 122,
+            "__rowNum__": 121,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen122",
+            "promptIdx": 32
+          },
+          {
+            "type": "string",
+            "name": "extra_question5",
+            "_row_num": 124,
+            "__rowNum__": 123,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen124",
+            "promptIdx": 33
+          },
+          {
+            "type": "string",
+            "name": "extra_question6",
+            "_row_num": 126,
+            "__rowNum__": 125,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen126",
+            "promptIdx": 34
+          },
+          {
+            "type": "string",
+            "name": "extra_question7",
+            "_row_num": 128,
+            "__rowNum__": 127,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen128",
+            "promptIdx": 35
+          },
+          {
+            "type": "string",
+            "name": "extra_question8",
+            "_row_num": 130,
+            "__rowNum__": 129,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen130",
+            "promptIdx": 36
+          },
+          {
+            "type": "string",
+            "name": "extra_question9",
+            "_row_num": 132,
+            "__rowNum__": 131,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen132",
+            "promptIdx": 37
+          },
+          {
+            "type": "string",
+            "name": "extra_question10",
+            "_row_num": 134,
+            "__rowNum__": 133,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen134",
+            "promptIdx": 38
+          },
+          {
+            "type": "string",
+            "name": "extra_question11",
+            "_row_num": 136,
+            "__rowNum__": 135,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen136",
+            "promptIdx": 39
+          },
+          {
+            "type": "string",
+            "name": "extra_question12",
+            "_row_num": 138,
+            "__rowNum__": 137,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen138",
+            "promptIdx": 40
+          },
+          {
+            "type": "string",
+            "name": "extra_question13",
+            "_row_num": 140,
+            "__rowNum__": 139,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen140",
+            "promptIdx": 41
+          },
+          {
+            "type": "string",
+            "name": "extra_question14",
+            "_row_num": 142,
+            "__rowNum__": 141,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen142",
+            "promptIdx": 42
+          },
+          {
+            "type": "string",
+            "name": "extra_question15",
+            "_row_num": 144,
+            "__rowNum__": 143,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen144",
+            "promptIdx": 43
+          },
+          {
+            "type": "string",
+            "name": "extra_question16",
+            "_row_num": 146,
+            "__rowNum__": 145,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen146",
+            "promptIdx": 44
+          },
+          {
+            "type": "string",
+            "name": "extra_question17",
+            "_row_num": 148,
+            "__rowNum__": 147,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen148",
+            "promptIdx": 45
+          },
+          {
+            "type": "string",
+            "name": "extra_question18",
+            "_row_num": 150,
+            "__rowNum__": 149,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen150",
+            "promptIdx": 46
+          },
+          {
+            "type": "string",
+            "name": "extra_question19",
+            "_row_num": 152,
+            "__rowNum__": 151,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen152",
+            "promptIdx": 47
+          },
+          {
+            "type": "string",
+            "name": "extra_question20",
+            "_row_num": 154,
+            "__rowNum__": 153,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen154",
+            "promptIdx": 48
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 125,
-            "_branch_label_enclosing_screen": "survey/_screen125",
-            "promptIdx": 26
+            "_row_num": 177,
+            "_branch_label_enclosing_screen": "survey/_screen177",
+            "promptIdx": 49
           }
         ],
         "validation_tag_map": {
           "finalize": [
             0,
-            2,
-            6
+            1,
+            2
           ]
         },
         "operations": [
           {
-            "clause": "begin screen",
-            "_row_num": 4,
-            "__rowNum__": 3,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 10,
-              "__rowNum__": 9,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nif (selected(data('healthcare_worker_name'), 'other_enter_name')) {\nactivePromptIndicies.push(1);\n}\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "type": "assign",
+            "name": "sample_date",
+            "calculation": "odkCommon.toOdkTimeStampFromDate(new Date())",
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "assign",
             "operationIdx": 0
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'consent_paper',data('consent_paper')]]))",
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_date',data('sample_date')]]))",
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "assign",
             "operationIdx": 1
           },
           {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name_other',data('healthcare_worker_name_other')]]))",
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "assign",
+            "clause": "begin screen",
+            "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 11,
+              "__rowNum__": 10,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nif (selected(data('healthcare_worker_name'), 'other_enter_name')) {\nactivePromptIndicies.push(1);\n}\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name',data('healthcare_worker_name')]]))",
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'consent_paper',data('consent_paper')]]))",
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "assign",
             "operationIdx": 3
           },
           {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name_other',data('healthcare_worker_name_other')]]))",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "assign",
+            "operationIdx": 4
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'healthcare_worker_name',data('healthcare_worker_name')]]))",
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "assign",
+            "operationIdx": 5
+          },
+          {
             "clause": "if",
             "condition": "data('consent_paper') == 'Yes'",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "goto_label",
-            "_branch_label": "_then15",
-            "operationIdx": 4
+            "_branch_label": "_then16",
+            "operationIdx": 6
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else104",
-            "_row_num": 104,
-            "operationIdx": 5
+            "_branch_label": "_else107",
+            "_row_num": 107,
+            "operationIdx": 7
           },
           {
             "clause": "begin screen",
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -2849,280 +3840,294 @@
               "__rowNum__": 25,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nif (selected(data('sample_type'), 'Other')) {\nactivePromptIndicies.push(4);\n}\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_note',data('sample_note')]]))",
-            "_row_num": 27,
-            "__rowNum__": 26,
-            "_token_type": "assign",
-            "operationIdx": 7
-          },
-          {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type_other',data('sample_type_other')]]))",
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "assign",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nif (selected(data('sample_type'), 'Other')) {\nactivePromptIndicies.push(4);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type',data('sample_type')]]))",
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type_other',data('sample_type_other')]]))",
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "assign",
             "operationIdx": 9
           },
           {
-            "clause": "if",
-            "condition": "selected(data('sample_type'), 'temperature')",
-            "_row_num": 30,
-            "__rowNum__": 29,
-            "_token_type": "goto_label",
-            "_branch_label": "_then30",
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_type',data('sample_type')]]))",
+            "_row_num": 28,
+            "__rowNum__": 27,
+            "_token_type": "assign",
             "operationIdx": 10
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else44",
-            "_row_num": 44,
-            "operationIdx": 11
-          },
-          {
-            "_row_num": 31,
+            "_row_num": 29,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 12
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temp_consent',data('temp_consent')]]))",
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_note',data('sample_note')]]))",
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "assign",
-            "operationIdx": 13
+            "operationIdx": 12
           },
           {
             "clause": "if",
-            "condition": "data('temp_consent') == 'Yes'",
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "condition": "selected(data('sample_type'), 'temperature')",
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "goto_label",
-            "_branch_label": "_then33",
-            "operationIdx": 14
+            "_branch_label": "_then31",
+            "operationIdx": 13
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else43",
-            "_row_num": 43,
-            "operationIdx": 15
+            "_branch_label": "_else46",
+            "_row_num": 46,
+            "operationIdx": 14
           },
           {
             "clause": "begin screen",
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 39,
-              "__rowNum__": 38,
+              "_row_num": 41,
+              "__rowNum__": 40,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nif (data('temp_consent') == 'Yes') {\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 15
           },
           {
             "type": "assign",
             "name": "log",
             "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_3',data('temperature_reading_3')]]))",
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 42,
+            "__rowNum__": 41,
+            "_token_type": "assign",
+            "operationIdx": 16
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_2',data('temperature_reading_2')]]))",
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "assign",
             "operationIdx": 17
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_2',data('temperature_reading_2')]]))",
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_1',data('temperature_reading_1')]]))",
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "assign",
             "operationIdx": 18
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temperature_reading_1',data('temperature_reading_1')]]))",
-            "_row_num": 42,
-            "__rowNum__": 41,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'temp_consent',data('temp_consent')]]))",
+            "_row_num": 45,
+            "__rowNum__": 44,
             "_token_type": "assign",
             "operationIdx": 19
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif43",
-            "_row_num": 43,
+            "_branch_label": "_endif46",
+            "_row_num": 46,
             "operationIdx": 20
+          },
+          {
+            "_row_num": 48,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 21
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'barcode_scanning',data('barcode_scanning')]]))",
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "assign",
+            "operationIdx": 22
+          },
+          {
+            "clause": "if",
+            "condition": "data('barcode_scanning') == 'Yes'",
+            "_row_num": 50,
+            "__rowNum__": 49,
+            "_token_type": "goto_label",
+            "_branch_label": "_then50",
+            "operationIdx": 23
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif44",
-            "_row_num": 44,
-            "operationIdx": 21
+            "_branch_label": "_else106",
+            "_row_num": 106,
+            "operationIdx": 24
           },
           {
             "clause": "begin screen",
-            "_row_num": 45,
-            "__rowNum__": 44,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 51,
-              "__rowNum__": 50,
+              "_row_num": 57,
+              "__rowNum__": 56,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 22
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 25
           },
           {
             "type": "assign",
             "name": "log",
             "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_1_notes',data('sample_id_1_notes')]]))",
-            "_row_num": 52,
-            "__rowNum__": 51,
+            "_row_num": 58,
+            "__rowNum__": 57,
             "_token_type": "assign",
-            "operationIdx": 23
-          },
-          {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_1',data('sample_id_manual_1')]]))",
-            "_row_num": 53,
-            "__rowNum__": 52,
-            "_token_type": "assign",
-            "operationIdx": 24
-          },
-          {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_1',data('sample_id_1')]]))",
-            "_row_num": 54,
-            "__rowNum__": 53,
-            "_token_type": "assign",
-            "operationIdx": 25
-          },
-          {
-            "_row_num": 57,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 26
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_2',data('scan_another_2')]]))",
-            "_row_num": 58,
-            "__rowNum__": 57,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_1',data('sample_id_manual_1')]]))",
+            "_row_num": 59,
+            "__rowNum__": 58,
             "_token_type": "assign",
             "operationIdx": 27
           },
           {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_1',data('sample_id_1')]]))",
+            "_row_num": 60,
+            "__rowNum__": 59,
+            "_token_type": "assign",
+            "operationIdx": 28
+          },
+          {
+            "_row_num": 61,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 29
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_2',data('scan_another_2')]]))",
+            "_row_num": 62,
+            "__rowNum__": 61,
+            "_token_type": "assign",
+            "operationIdx": 30
+          },
+          {
             "clause": "if",
             "condition": "data('scan_another_2') == 'Yes'",
-            "_row_num": 59,
-            "__rowNum__": 58,
+            "_row_num": 64,
+            "__rowNum__": 63,
             "_token_type": "goto_label",
-            "_branch_label": "_then59",
-            "operationIdx": 28
+            "_branch_label": "_then64",
+            "operationIdx": 31
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else103",
-            "_row_num": 103,
-            "operationIdx": 29
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 60,
-            "__rowNum__": 59,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 69,
-              "__rowNum__": 68,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 30
-          },
-          {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_3',data('scan_another_3')]]))",
-            "_row_num": 70,
-            "__rowNum__": 69,
-            "_token_type": "assign",
-            "operationIdx": 31
-          },
-          {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2_notes',data('sample_id_2_notes')]]))",
-            "_row_num": 71,
-            "__rowNum__": 70,
-            "_token_type": "assign",
+            "_branch_label": "_else105",
+            "_row_num": 105,
             "operationIdx": 32
           },
           {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_2',data('sample_id_manual_2')]]))",
-            "_row_num": 72,
-            "__rowNum__": 71,
-            "_token_type": "assign",
+            "clause": "begin screen",
+            "_row_num": 65,
+            "__rowNum__": 64,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 71,
+              "__rowNum__": 70,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 33
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2',data('sample_id_2')]]))",
-            "_row_num": 73,
-            "__rowNum__": 72,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2_notes',data('sample_id_2_notes')]]))",
+            "_row_num": 72,
+            "__rowNum__": 71,
             "_token_type": "assign",
             "operationIdx": 34
           },
           {
-            "clause": "if",
-            "condition": "data('scan_another_3') == 'Yes'",
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_2',data('sample_id_manual_2')]]))",
+            "_row_num": 73,
+            "__rowNum__": 72,
+            "_token_type": "assign",
+            "operationIdx": 35
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_2',data('sample_id_2')]]))",
             "_row_num": 74,
             "__rowNum__": 73,
+            "_token_type": "assign",
+            "operationIdx": 36
+          },
+          {
+            "_row_num": 75,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 37
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_3',data('scan_another_3')]]))",
+            "_row_num": 76,
+            "__rowNum__": 75,
+            "_token_type": "assign",
+            "operationIdx": 38
+          },
+          {
+            "clause": "if",
+            "condition": "data('scan_another_3') == 'Yes'",
+            "_row_num": 78,
+            "__rowNum__": 77,
             "_token_type": "goto_label",
-            "_branch_label": "_then74",
-            "operationIdx": 35
+            "_branch_label": "_then78",
+            "operationIdx": 39
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else102",
-            "_row_num": 102,
-            "operationIdx": 36
+            "_branch_label": "_else104",
+            "_row_num": 104,
+            "operationIdx": 40
           },
           {
             "clause": "begin screen",
-            "_row_num": 76,
-            "__rowNum__": 75,
+            "_row_num": 79,
+            "__rowNum__": 78,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -3130,362 +4135,748 @@
               "__rowNum__": 84,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 37
-          },
-          {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_4',data('scan_another_4')]]))",
-            "_row_num": 86,
-            "__rowNum__": 85,
-            "_token_type": "assign",
-            "operationIdx": 38
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 41
           },
           {
             "type": "assign",
             "name": "log",
             "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_3_notes',data('sample_id_3_notes')]]))",
-            "_row_num": 87,
-            "__rowNum__": 86,
+            "_row_num": 86,
+            "__rowNum__": 85,
             "_token_type": "assign",
-            "operationIdx": 39
+            "operationIdx": 42
           },
           {
             "type": "assign",
             "name": "log",
             "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_3',data('sample_id_manual_3')]]))",
-            "_row_num": 88,
-            "__rowNum__": 87,
+            "_row_num": 87,
+            "__rowNum__": 86,
             "_token_type": "assign",
-            "operationIdx": 40
+            "operationIdx": 43
           },
           {
             "type": "assign",
             "name": "log",
             "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_3',data('sample_id_3')]]))",
-            "_row_num": 89,
-            "__rowNum__": 88,
+            "_row_num": 88,
+            "__rowNum__": 87,
             "_token_type": "assign",
-            "operationIdx": 41
-          },
-          {
-            "clause": "if",
-            "condition": "data('scan_another_4') == 'Yes'",
-            "_row_num": 90,
-            "__rowNum__": 89,
-            "_token_type": "goto_label",
-            "_branch_label": "_then90",
-            "operationIdx": 42
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else101",
-            "_row_num": 101,
-            "operationIdx": 43
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 91,
-            "__rowNum__": 90,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 97,
-              "__rowNum__": 96,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 44
           },
           {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4_notes',data('sample_id_4_notes')]]))",
-            "_row_num": 98,
-            "__rowNum__": 97,
-            "_token_type": "assign",
+            "_row_num": 89,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 45
           },
           {
             "type": "assign",
             "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_4',data('sample_id_manual_4')]]))",
-            "_row_num": 99,
-            "__rowNum__": 98,
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'scan_another_4',data('scan_another_4')]]))",
+            "_row_num": 90,
+            "__rowNum__": 89,
             "_token_type": "assign",
             "operationIdx": 46
           },
           {
-            "type": "assign",
-            "name": "log",
-            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4',data('sample_id_4')]]))",
-            "_row_num": 100,
-            "__rowNum__": 99,
-            "_token_type": "assign",
+            "clause": "if",
+            "condition": "data('scan_another_4') == 'Yes'",
+            "_row_num": 92,
+            "__rowNum__": 91,
+            "_token_type": "goto_label",
+            "_branch_label": "_then92",
             "operationIdx": 47
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif101",
-            "_row_num": 101,
+            "_branch_label": "_else103",
+            "_row_num": 103,
             "operationIdx": 48
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif102",
-            "_row_num": 102,
+            "clause": "begin screen",
+            "_row_num": 93,
+            "__rowNum__": 92,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 99,
+              "__rowNum__": 98,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 49
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4_notes',data('sample_id_4_notes')]]))",
+            "_row_num": 100,
+            "__rowNum__": 99,
+            "_token_type": "assign",
+            "operationIdx": 50
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_manual_4',data('sample_id_manual_4')]]))",
+            "_row_num": 101,
+            "__rowNum__": 100,
+            "_token_type": "assign",
+            "operationIdx": 51
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'sample_id_4',data('sample_id_4')]]))",
+            "_row_num": 102,
+            "__rowNum__": 101,
+            "_token_type": "assign",
+            "operationIdx": 52
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
             "_branch_label": "_endif103",
             "_row_num": 103,
-            "operationIdx": 50
+            "operationIdx": 53
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
             "_branch_label": "_endif104",
             "_row_num": 104,
-            "operationIdx": 51
+            "operationIdx": 54
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif105",
+            "_row_num": 105,
+            "operationIdx": 55
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif106",
+            "_row_num": 106,
+            "operationIdx": 56
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif107",
+            "_row_num": 107,
+            "operationIdx": 57
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 108,
+            "__rowNum__": 107,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 112,
+              "__rowNum__": 111,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 58
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'participant_questions',data('participant_questions')]]))",
+            "_row_num": 113,
+            "__rowNum__": 112,
+            "_token_type": "assign",
+            "operationIdx": 59
+          },
+          {
+            "clause": "if",
+            "condition": 0,
+            "_row_num": 115,
+            "__rowNum__": 114,
+            "_token_type": "goto_label",
+            "_branch_label": "_then115",
+            "operationIdx": 60
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else156",
+            "_row_num": 156,
+            "operationIdx": 61
+          },
+          {
+            "_row_num": 116,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 62
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question1',data('extra_question1')]]))",
+            "_row_num": 117,
+            "__rowNum__": 116,
+            "_token_type": "assign",
+            "operationIdx": 63
+          },
+          {
+            "_row_num": 118,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 64
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question2',data('extra_question2')]]))",
+            "_row_num": 119,
+            "__rowNum__": 118,
+            "_token_type": "assign",
+            "operationIdx": 65
+          },
+          {
+            "_row_num": 120,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 66
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question3',data('extra_question3')]]))",
+            "_row_num": 121,
+            "__rowNum__": 120,
+            "_token_type": "assign",
+            "operationIdx": 67
+          },
+          {
+            "_row_num": 122,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(32);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 68
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question4',data('extra_question4')]]))",
+            "_row_num": 123,
+            "__rowNum__": 122,
+            "_token_type": "assign",
+            "operationIdx": 69
+          },
+          {
+            "_row_num": 124,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(33);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 70
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question5',data('extra_question5')]]))",
+            "_row_num": 125,
+            "__rowNum__": 124,
+            "_token_type": "assign",
+            "operationIdx": 71
+          },
+          {
+            "_row_num": 126,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(34);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 72
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question6',data('extra_question6')]]))",
+            "_row_num": 127,
+            "__rowNum__": 126,
+            "_token_type": "assign",
+            "operationIdx": 73
+          },
+          {
+            "_row_num": 128,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(35);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 74
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question7',data('extra_question7')]]))",
+            "_row_num": 129,
+            "__rowNum__": 128,
+            "_token_type": "assign",
+            "operationIdx": 75
+          },
+          {
+            "_row_num": 130,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(36);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 76
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question8',data('extra_question8')]]))",
+            "_row_num": 131,
+            "__rowNum__": 130,
+            "_token_type": "assign",
+            "operationIdx": 77
+          },
+          {
+            "_row_num": 132,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(37);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 78
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question9',data('extra_question9')]]))",
+            "_row_num": 133,
+            "__rowNum__": 132,
+            "_token_type": "assign",
+            "operationIdx": 79
+          },
+          {
+            "_row_num": 134,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(38);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 80
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question10',data('extra_question10')]]))",
+            "_row_num": 135,
+            "__rowNum__": 134,
+            "_token_type": "assign",
+            "operationIdx": 81
+          },
+          {
+            "_row_num": 136,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(39);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 82
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question11',data('extra_question11')]]))",
+            "_row_num": 137,
+            "__rowNum__": 136,
+            "_token_type": "assign",
+            "operationIdx": 83
+          },
+          {
+            "_row_num": 138,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(40);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 84
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question12',data('extra_question12')]]))",
+            "_row_num": 139,
+            "__rowNum__": 138,
+            "_token_type": "assign",
+            "operationIdx": 85
+          },
+          {
+            "_row_num": 140,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(41);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 86
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question13',data('extra_question13')]]))",
+            "_row_num": 141,
+            "__rowNum__": 140,
+            "_token_type": "assign",
+            "operationIdx": 87
+          },
+          {
+            "_row_num": 142,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(42);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 88
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question14',data('extra_question14')]]))",
+            "_row_num": 143,
+            "__rowNum__": 142,
+            "_token_type": "assign",
+            "operationIdx": 89
+          },
+          {
+            "_row_num": 144,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(43);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 90
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question15',data('extra_question15')]]))",
+            "_row_num": 145,
+            "__rowNum__": 144,
+            "_token_type": "assign",
+            "operationIdx": 91
+          },
+          {
+            "_row_num": 146,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(44);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 92
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question16',data('extra_question16')]]))",
+            "_row_num": 147,
+            "__rowNum__": 146,
+            "_token_type": "assign",
+            "operationIdx": 93
+          },
+          {
+            "_row_num": 148,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(45);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 94
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question17',data('extra_question17')]]))",
+            "_row_num": 149,
+            "__rowNum__": 148,
+            "_token_type": "assign",
+            "operationIdx": 95
+          },
+          {
+            "_row_num": 150,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(46);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 96
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question18',data('extra_question18')]]))",
+            "_row_num": 151,
+            "__rowNum__": 150,
+            "_token_type": "assign",
+            "operationIdx": 97
+          },
+          {
+            "_row_num": 152,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(47);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 98
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question19',data('extra_question19')]]))",
+            "_row_num": 153,
+            "__rowNum__": 152,
+            "_token_type": "assign",
+            "operationIdx": 99
+          },
+          {
+            "_row_num": 154,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(48);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 100
+          },
+          {
+            "type": "assign",
+            "name": "log",
+            "calculation": "JSON.stringify(((data('log')==null)?[]:JSON.parse(data('log'))).concat([[now().toUTCString(),'extra_question20',data('extra_question20')]]))",
+            "_row_num": 155,
+            "__rowNum__": 154,
+            "_token_type": "assign",
+            "operationIdx": 101
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif156",
+            "_row_num": 156,
+            "operationIdx": 102
           },
           {
             "type": "assign",
             "name": "log_0",
             "calculation": "data('log').substring(0,60000) == '' ? ' ' : data('log').substring(0,60000)",
-            "_row_num": 105,
-            "__rowNum__": 104,
+            "_row_num": 157,
+            "__rowNum__": 156,
             "_token_type": "assign",
-            "operationIdx": 52
+            "operationIdx": 103
           },
           {
             "type": "assign",
             "name": "log_1",
             "calculation": "data('log').substring(60000,120000) == '' ? ' ' : data('log').substring(60000,120000)",
-            "_row_num": 106,
-            "__rowNum__": 105,
+            "_row_num": 158,
+            "__rowNum__": 157,
             "_token_type": "assign",
-            "operationIdx": 53
+            "operationIdx": 104
           },
           {
             "type": "assign",
             "name": "log_2",
             "calculation": "data('log').substring(120000,180000) == '' ? ' ' : data('log').substring(120000,180000)",
-            "_row_num": 107,
-            "__rowNum__": 106,
+            "_row_num": 159,
+            "__rowNum__": 158,
             "_token_type": "assign",
-            "operationIdx": 54
+            "operationIdx": 105
           },
           {
             "type": "assign",
             "name": "log_3",
             "calculation": "data('log').substring(180000,240000) == '' ? ' ' : data('log').substring(180000,240000)",
-            "_row_num": 108,
-            "__rowNum__": 107,
+            "_row_num": 160,
+            "__rowNum__": 159,
             "_token_type": "assign",
-            "operationIdx": 55
+            "operationIdx": 106
           },
           {
             "type": "assign",
             "name": "log_4",
             "calculation": "data('log').substring(240000,300000) == '' ? ' ' : data('log').substring(240000,300000)",
-            "_row_num": 109,
-            "__rowNum__": 108,
+            "_row_num": 161,
+            "__rowNum__": 160,
             "_token_type": "assign",
-            "operationIdx": 56
+            "operationIdx": 107
           },
           {
             "type": "assign",
             "name": "log_5",
             "calculation": "data('log').substring(300000,360000) == '' ? ' ' : data('log').substring(300000,360000)",
-            "_row_num": 110,
-            "__rowNum__": 109,
+            "_row_num": 162,
+            "__rowNum__": 161,
             "_token_type": "assign",
-            "operationIdx": 57
+            "operationIdx": 108
           },
           {
             "type": "assign",
             "name": "log_6",
             "calculation": "data('log').substring(360000,420000) == '' ? ' ' : data('log').substring(360000,420000)",
-            "_row_num": 111,
-            "__rowNum__": 110,
+            "_row_num": 163,
+            "__rowNum__": 162,
             "_token_type": "assign",
-            "operationIdx": 58
+            "operationIdx": 109
           },
           {
             "type": "assign",
             "name": "log_7",
             "calculation": "data('log').substring(420000,480000) == '' ? ' ' : data('log').substring(420000,480000)",
-            "_row_num": 112,
-            "__rowNum__": 111,
+            "_row_num": 164,
+            "__rowNum__": 163,
             "_token_type": "assign",
-            "operationIdx": 59
+            "operationIdx": 110
           },
           {
             "type": "assign",
             "name": "log_8",
             "calculation": "data('log').substring(480000,540000) == '' ? ' ' : data('log').substring(480000,540000)",
-            "_row_num": 113,
-            "__rowNum__": 112,
+            "_row_num": 165,
+            "__rowNum__": 164,
             "_token_type": "assign",
-            "operationIdx": 60
+            "operationIdx": 111
           },
           {
             "type": "assign",
             "name": "log_9",
             "calculation": "data('log').substring(540000,600000) == '' ? ' ' : data('log').substring(540000,600000)",
-            "_row_num": 114,
-            "__rowNum__": 113,
+            "_row_num": 166,
+            "__rowNum__": 165,
             "_token_type": "assign",
-            "operationIdx": 61
+            "operationIdx": 112
           },
           {
             "type": "assign",
             "name": "log_10",
             "calculation": "data('log').substring(600000,660000) == '' ? ' ' : data('log').substring(600000,660000)",
-            "_row_num": 115,
-            "__rowNum__": 114,
+            "_row_num": 167,
+            "__rowNum__": 166,
             "_token_type": "assign",
-            "operationIdx": 62
+            "operationIdx": 113
           },
           {
             "type": "assign",
             "name": "log_11",
             "calculation": "data('log').substring(660000,720000) == '' ? ' ' : data('log').substring(660000,720000)",
-            "_row_num": 116,
-            "__rowNum__": 115,
+            "_row_num": 168,
+            "__rowNum__": 167,
             "_token_type": "assign",
-            "operationIdx": 63
+            "operationIdx": 114
           },
           {
             "type": "assign",
             "name": "log_12",
             "calculation": "data('log').substring(720000,780000) == '' ? ' ' : data('log').substring(720000,780000)",
-            "_row_num": 117,
-            "__rowNum__": 116,
+            "_row_num": 169,
+            "__rowNum__": 168,
             "_token_type": "assign",
-            "operationIdx": 64
+            "operationIdx": 115
           },
           {
             "type": "assign",
             "name": "log_13",
             "calculation": "data('log').substring(780000,840000) == '' ? ' ' : data('log').substring(780000,840000)",
-            "_row_num": 118,
-            "__rowNum__": 117,
+            "_row_num": 170,
+            "__rowNum__": 169,
             "_token_type": "assign",
-            "operationIdx": 65
+            "operationIdx": 116
           },
           {
             "type": "assign",
             "name": "log_14",
             "calculation": "data('log').substring(840000,900000) == '' ? ' ' : data('log').substring(840000,900000)",
-            "_row_num": 119,
-            "__rowNum__": 118,
+            "_row_num": 171,
+            "__rowNum__": 170,
             "_token_type": "assign",
-            "operationIdx": 66
+            "operationIdx": 117
           },
           {
             "type": "assign",
             "name": "log_15",
             "calculation": "data('log').substring(900000,960000) == '' ? ' ' : data('log').substring(900000,960000)",
-            "_row_num": 120,
-            "__rowNum__": 119,
+            "_row_num": 172,
+            "__rowNum__": 171,
             "_token_type": "assign",
-            "operationIdx": 67
+            "operationIdx": 118
           },
           {
             "type": "assign",
             "name": "log_16",
             "calculation": "data('log').substring(960000,1020000) == '' ? ' ' : data('log').substring(960000,1020000)",
-            "_row_num": 121,
-            "__rowNum__": 120,
+            "_row_num": 173,
+            "__rowNum__": 172,
             "_token_type": "assign",
-            "operationIdx": 68
+            "operationIdx": 119
           },
           {
             "type": "assign",
             "name": "log_17",
             "calculation": "data('log').substring(1020000,1080000) == '' ? ' ' : data('log').substring(1020000,1080000)",
-            "_row_num": 122,
-            "__rowNum__": 121,
+            "_row_num": 174,
+            "__rowNum__": 173,
             "_token_type": "assign",
-            "operationIdx": 69
+            "operationIdx": 120
           },
           {
             "type": "assign",
             "name": "log_18",
             "calculation": "data('log').substring(1080000,1140000) == '' ? ' ' : data('log').substring(1080000,1140000)",
-            "_row_num": 123,
-            "__rowNum__": 122,
+            "_row_num": 175,
+            "__rowNum__": 174,
             "_token_type": "assign",
-            "operationIdx": 70
+            "operationIdx": 121
           },
           {
             "type": "assign",
             "name": "log_19",
             "calculation": "data('log').substring(1140000,1200000) == '' ? ' ' : data('log').substring(1140000,1200000)",
-            "_row_num": 124,
-            "__rowNum__": 123,
+            "_row_num": 176,
+            "__rowNum__": 175,
             "_token_type": "assign",
-            "operationIdx": 71
+            "operationIdx": 122
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 125,
-            "operationIdx": 72
+            "_row_num": 177,
+            "operationIdx": 123
           },
           {
-            "_row_num": 125,
+            "_row_num": 177,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(49);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 73
+            "operationIdx": 124
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 125,
-            "operationIdx": 74
+            "_row_num": 177,
+            "operationIdx": 125
           }
         ],
         "branch_label_map": {
-          "_screen4": 0,
-          "_then15": 6,
-          "_screen20": 6,
-          "_then30": 12,
-          "_screen31": 12,
-          "_then33": 16,
-          "_screen34": 16,
-          "_else43": 21,
-          "_endif43": 21,
-          "_else44": 22,
-          "_endif44": 22,
-          "_screen45": 22,
-          "_screen57": 26,
-          "_then59": 30,
-          "_screen60": 30,
-          "_then74": 37,
-          "_screen76": 37,
-          "_then90": 44,
-          "_screen91": 44,
-          "_else101": 49,
-          "_endif101": 49,
-          "_else102": 50,
-          "_endif102": 50,
-          "_else103": 51,
-          "_endif103": 51,
-          "_else104": 52,
-          "_endif104": 52,
-          "_contents": 73,
-          "_screen125": 73
+          "_screen5": 2,
+          "_then16": 8,
+          "_screen21": 8,
+          "_screen29": 11,
+          "_then31": 15,
+          "_screen32": 15,
+          "_else46": 21,
+          "_endif46": 21,
+          "_screen48": 21,
+          "_then50": 25,
+          "_screen51": 25,
+          "_screen61": 29,
+          "_then64": 33,
+          "_screen65": 33,
+          "_screen75": 37,
+          "_then78": 41,
+          "_screen79": 41,
+          "_screen89": 45,
+          "_then92": 49,
+          "_screen93": 49,
+          "_else103": 54,
+          "_endif103": 54,
+          "_else104": 55,
+          "_endif104": 55,
+          "_else105": 56,
+          "_endif105": 56,
+          "_else106": 57,
+          "_endif106": 57,
+          "_else107": 58,
+          "_endif107": 58,
+          "_screen108": 58,
+          "_then115": 62,
+          "_screen116": 62,
+          "_screen118": 64,
+          "_screen120": 66,
+          "_screen122": 68,
+          "_screen124": 70,
+          "_screen126": 72,
+          "_screen128": 74,
+          "_screen130": 76,
+          "_screen132": 78,
+          "_screen134": 80,
+          "_screen136": 82,
+          "_screen138": 84,
+          "_screen140": 86,
+          "_screen142": 88,
+          "_screen144": 90,
+          "_screen146": 92,
+          "_screen148": 94,
+          "_screen150": 96,
+          "_screen152": 98,
+          "_screen154": 100,
+          "_else156": 103,
+          "_endif156": 103,
+          "_contents": 124,
+          "_screen177": 124
         }
       },
       "initial": {
@@ -3687,7 +5078,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
@@ -3699,6 +5090,10 @@
             "section_name": "survey"
           },
           {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 27,
             "section_name": "survey"
           },
@@ -3707,19 +5102,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 29,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 32,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 40,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 41,
+            "_row_num": 30,
             "section_name": "survey"
           },
           {
@@ -3727,15 +5110,19 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 52,
+            "_row_num": 43,
             "section_name": "survey"
           },
           {
-            "_row_num": 53,
+            "_row_num": 44,
             "section_name": "survey"
           },
           {
-            "_row_num": 54,
+            "_row_num": 45,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 49,
             "section_name": "survey"
           },
           {
@@ -3743,11 +5130,15 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 70,
+            "_row_num": 59,
             "section_name": "survey"
           },
           {
-            "_row_num": 71,
+            "_row_num": 60,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 62,
             "section_name": "survey"
           },
           {
@@ -3756,6 +5147,14 @@
           },
           {
             "_row_num": 73,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 74,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 76,
             "section_name": "survey"
           },
           {
@@ -3771,19 +5170,103 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 89,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 98,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 99,
+            "_row_num": 90,
             "section_name": "survey"
           },
           {
             "_row_num": 100,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 101,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 102,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 113,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 117,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 119,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 121,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 123,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 125,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 127,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 129,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 131,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 133,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 135,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 137,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 139,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 141,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 143,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 145,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 147,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 149,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 151,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 153,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 155,
             "section_name": "survey"
           },
           {
@@ -3801,7 +5284,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 105,
+            "_row_num": 157,
             "section_name": "survey"
           },
           {
@@ -3819,7 +5302,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 106,
+            "_row_num": 158,
             "section_name": "survey"
           },
           {
@@ -3837,7 +5320,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 107,
+            "_row_num": 159,
             "section_name": "survey"
           },
           {
@@ -3855,7 +5338,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 108,
+            "_row_num": 160,
             "section_name": "survey"
           },
           {
@@ -3873,7 +5356,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 109,
+            "_row_num": 161,
             "section_name": "survey"
           },
           {
@@ -3891,7 +5374,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 110,
+            "_row_num": 162,
             "section_name": "survey"
           },
           {
@@ -3909,7 +5392,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 111,
+            "_row_num": 163,
             "section_name": "survey"
           },
           {
@@ -3927,7 +5410,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 112,
+            "_row_num": 164,
             "section_name": "survey"
           },
           {
@@ -3945,7 +5428,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 113,
+            "_row_num": 165,
             "section_name": "survey"
           },
           {
@@ -3963,7 +5446,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 114,
+            "_row_num": 166,
             "section_name": "survey"
           },
           {
@@ -3981,7 +5464,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 115,
+            "_row_num": 167,
             "section_name": "survey"
           },
           {
@@ -3999,7 +5482,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 116,
+            "_row_num": 168,
             "section_name": "survey"
           },
           {
@@ -4017,7 +5500,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 117,
+            "_row_num": 169,
             "section_name": "survey"
           },
           {
@@ -4035,7 +5518,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 118,
+            "_row_num": 170,
             "section_name": "survey"
           },
           {
@@ -4053,7 +5536,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 119,
+            "_row_num": 171,
             "section_name": "survey"
           },
           {
@@ -4071,7 +5554,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 120,
+            "_row_num": 172,
             "section_name": "survey"
           },
           {
@@ -4089,7 +5572,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 121,
+            "_row_num": 173,
             "section_name": "survey"
           },
           {
@@ -4107,7 +5590,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 122,
+            "_row_num": 174,
             "section_name": "survey"
           },
           {
@@ -4125,7 +5608,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 123,
+            "_row_num": 175,
             "section_name": "survey"
           },
           {
@@ -4143,7 +5626,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 124,
+            "_row_num": 176,
             "section_name": "survey"
           },
           {
@@ -4160,7 +5643,7 @@
       "healthcare_worker_name": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -4174,7 +5657,7 @@
       "healthcare_worker_name_other": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -4187,7 +5670,7 @@
       "consent_paper": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -4201,7 +5684,7 @@
       "sample_type": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -4226,7 +5709,7 @@
       "sample_type_other": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -4236,10 +5719,23 @@
         "elementSet": "data",
         "elementPath": "sample_type_other"
       },
+      "sample_note": {
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "sample_note",
+        "elementName": "sample_note",
+        "elementSet": "data",
+        "elementPath": "sample_note"
+      },
       "temp_consent": {
         "_defn": [
           {
-            "_row_num": 31,
+            "_row_num": 33,
             "section_name": "survey"
           }
         ],
@@ -4253,7 +5749,7 @@
       "temperature_reading_1": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -4266,7 +5762,7 @@
       "temperature_reading_2": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -4279,7 +5775,7 @@
       "temperature_reading_3": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -4289,10 +5785,24 @@
         "elementSet": "data",
         "elementPath": "temperature_reading_3"
       },
+      "barcode_scanning": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "barcode_scanning",
+        "elementKey": "barcode_scanning",
+        "elementName": "barcode_scanning",
+        "elementSet": "data",
+        "elementPath": "barcode_scanning"
+      },
       "sample_id_1": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -4305,7 +5815,7 @@
       "sample_id_manual_1": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -4318,7 +5828,7 @@
       "sample_id_1_notes": {
         "_defn": [
           {
-            "_row_num": 50,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -4331,7 +5841,7 @@
       "scan_another_2": {
         "_defn": [
           {
-            "_row_num": 57,
+            "_row_num": 61,
             "section_name": "survey"
           }
         ],
@@ -4345,7 +5855,7 @@
       "sample_id_2": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 66,
             "section_name": "survey"
           }
         ],
@@ -4358,7 +5868,7 @@
       "sample_id_manual_2": {
         "_defn": [
           {
-            "_row_num": 64,
+            "_row_num": 68,
             "section_name": "survey"
           }
         ],
@@ -4371,7 +5881,7 @@
       "sample_id_2_notes": {
         "_defn": [
           {
-            "_row_num": 66,
+            "_row_num": 70,
             "section_name": "survey"
           }
         ],
@@ -4384,7 +5894,7 @@
       "scan_another_3": {
         "_defn": [
           {
-            "_row_num": 68,
+            "_row_num": 75,
             "section_name": "survey"
           }
         ],
@@ -4398,7 +5908,7 @@
       "sample_id_3": {
         "_defn": [
           {
-            "_row_num": 77,
+            "_row_num": 80,
             "section_name": "survey"
           }
         ],
@@ -4411,7 +5921,7 @@
       "sample_id_manual_3": {
         "_defn": [
           {
-            "_row_num": 79,
+            "_row_num": 82,
             "section_name": "survey"
           }
         ],
@@ -4424,7 +5934,7 @@
       "sample_id_3_notes": {
         "_defn": [
           {
-            "_row_num": 81,
+            "_row_num": 84,
             "section_name": "survey"
           }
         ],
@@ -4437,7 +5947,7 @@
       "scan_another_4": {
         "_defn": [
           {
-            "_row_num": 83,
+            "_row_num": 89,
             "section_name": "survey"
           }
         ],
@@ -4451,7 +5961,7 @@
       "sample_id_4": {
         "_defn": [
           {
-            "_row_num": 92,
+            "_row_num": 94,
             "section_name": "survey"
           }
         ],
@@ -4464,7 +5974,7 @@
       "sample_id_manual_4": {
         "_defn": [
           {
-            "_row_num": 94,
+            "_row_num": 96,
             "section_name": "survey"
           }
         ],
@@ -4477,7 +5987,7 @@
       "sample_id_4_notes": {
         "_defn": [
           {
-            "_row_num": 96,
+            "_row_num": 98,
             "section_name": "survey"
           }
         ],
@@ -4486,6 +5996,291 @@
         "elementName": "sample_id_4_notes",
         "elementSet": "data",
         "elementPath": "sample_id_4_notes"
+      },
+      "participant_questions": {
+        "_defn": [
+          {
+            "_row_num": 111,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "participant_questions",
+        "elementName": "participant_questions",
+        "elementSet": "data",
+        "elementPath": "participant_questions"
+      },
+      "extra_question1": {
+        "_defn": [
+          {
+            "_row_num": 116,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question1",
+        "elementName": "extra_question1",
+        "elementSet": "data",
+        "elementPath": "extra_question1"
+      },
+      "extra_question2": {
+        "_defn": [
+          {
+            "_row_num": 118,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question2",
+        "elementName": "extra_question2",
+        "elementSet": "data",
+        "elementPath": "extra_question2"
+      },
+      "extra_question3": {
+        "_defn": [
+          {
+            "_row_num": 120,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question3",
+        "elementName": "extra_question3",
+        "elementSet": "data",
+        "elementPath": "extra_question3"
+      },
+      "extra_question4": {
+        "_defn": [
+          {
+            "_row_num": 122,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question4",
+        "elementName": "extra_question4",
+        "elementSet": "data",
+        "elementPath": "extra_question4"
+      },
+      "extra_question5": {
+        "_defn": [
+          {
+            "_row_num": 124,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question5",
+        "elementName": "extra_question5",
+        "elementSet": "data",
+        "elementPath": "extra_question5"
+      },
+      "extra_question6": {
+        "_defn": [
+          {
+            "_row_num": 126,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question6",
+        "elementName": "extra_question6",
+        "elementSet": "data",
+        "elementPath": "extra_question6"
+      },
+      "extra_question7": {
+        "_defn": [
+          {
+            "_row_num": 128,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question7",
+        "elementName": "extra_question7",
+        "elementSet": "data",
+        "elementPath": "extra_question7"
+      },
+      "extra_question8": {
+        "_defn": [
+          {
+            "_row_num": 130,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question8",
+        "elementName": "extra_question8",
+        "elementSet": "data",
+        "elementPath": "extra_question8"
+      },
+      "extra_question9": {
+        "_defn": [
+          {
+            "_row_num": 132,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question9",
+        "elementName": "extra_question9",
+        "elementSet": "data",
+        "elementPath": "extra_question9"
+      },
+      "extra_question10": {
+        "_defn": [
+          {
+            "_row_num": 134,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question10",
+        "elementName": "extra_question10",
+        "elementSet": "data",
+        "elementPath": "extra_question10"
+      },
+      "extra_question11": {
+        "_defn": [
+          {
+            "_row_num": 136,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question11",
+        "elementName": "extra_question11",
+        "elementSet": "data",
+        "elementPath": "extra_question11"
+      },
+      "extra_question12": {
+        "_defn": [
+          {
+            "_row_num": 138,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question12",
+        "elementName": "extra_question12",
+        "elementSet": "data",
+        "elementPath": "extra_question12"
+      },
+      "extra_question13": {
+        "_defn": [
+          {
+            "_row_num": 140,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question13",
+        "elementName": "extra_question13",
+        "elementSet": "data",
+        "elementPath": "extra_question13"
+      },
+      "extra_question14": {
+        "_defn": [
+          {
+            "_row_num": 142,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question14",
+        "elementName": "extra_question14",
+        "elementSet": "data",
+        "elementPath": "extra_question14"
+      },
+      "extra_question15": {
+        "_defn": [
+          {
+            "_row_num": 144,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question15",
+        "elementName": "extra_question15",
+        "elementSet": "data",
+        "elementPath": "extra_question15"
+      },
+      "extra_question16": {
+        "_defn": [
+          {
+            "_row_num": 146,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question16",
+        "elementName": "extra_question16",
+        "elementSet": "data",
+        "elementPath": "extra_question16"
+      },
+      "extra_question17": {
+        "_defn": [
+          {
+            "_row_num": 148,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question17",
+        "elementName": "extra_question17",
+        "elementSet": "data",
+        "elementPath": "extra_question17"
+      },
+      "extra_question18": {
+        "_defn": [
+          {
+            "_row_num": 150,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question18",
+        "elementName": "extra_question18",
+        "elementSet": "data",
+        "elementPath": "extra_question18"
+      },
+      "extra_question19": {
+        "_defn": [
+          {
+            "_row_num": 152,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question19",
+        "elementName": "extra_question19",
+        "elementSet": "data",
+        "elementPath": "extra_question19"
+      },
+      "extra_question20": {
+        "_defn": [
+          {
+            "_row_num": 154,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "extra_question20",
+        "elementName": "extra_question20",
+        "elementSet": "data",
+        "elementPath": "extra_question20"
+      },
+      "sample_date": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "sample_date",
+        "elementName": "sample_date",
+        "elementSet": "data",
+        "elementPath": "sample_date"
       },
       "sample_type_items": {
         "type": "string",
@@ -4611,6 +6406,13 @@
     "properties": [
       {
         "_partition": "Column",
+        "_aspect": "barcode_scanning",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"barcode_scanning\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":48},{\"choice_list_name\":\"barcode_scanning\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":49}]"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "consent_paper",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -4635,21 +6437,21 @@
         "_aspect": "scan_another_2",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"scan_another_2\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":38},{\"choice_list_name\":\"scan_another_2\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"scan_another_2\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":39},{\"choice_list_name\":\"scan_another_2\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":40}]"
       },
       {
         "_partition": "Column",
         "_aspect": "scan_another_3",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"scan_another_3\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":41},{\"choice_list_name\":\"scan_another_3\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":42}]"
+        "_value": "[{\"choice_list_name\":\"scan_another_3\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":42},{\"choice_list_name\":\"scan_another_3\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":43}]"
       },
       {
         "_partition": "Column",
         "_aspect": "scan_another_4",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"scan_another_4\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":44},{\"choice_list_name\":\"scan_another_4\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":45}]"
+        "_value": "[{\"choice_list_name\":\"scan_another_4\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":45},{\"choice_list_name\":\"scan_another_4\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":46}]"
       },
       {
         "_partition": "Column",
